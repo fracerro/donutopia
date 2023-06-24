@@ -47,8 +47,20 @@ Matrix& Matrix::operator*=(const ftype lambda) {
   return *this;
 }
 
+Matrix& Matrix::transposed() {
+  ftype tmp;
+  for (int i = 0; i < 3; i++) {
+    for (int j = i; j < 3; j++) {
+      tmp = mat[i][j];
+      mat[i][j] = mat[j][i]; 
+      mat[j][i] = tmp;
+    }
+  }
+  return *this;
+}
+
 ftype const& Matrix::operator()(int i, int j) const {
-  return mat[i][j];
+  return mat[i][j]; 
 }
 
 ftype& Matrix::operator()(int i, int j) {
@@ -57,20 +69,16 @@ ftype& Matrix::operator()(int i, int j) {
 
 
 std::ostream& operator<<(std::ostream& os, const Matrix& P) {
-  os << "[";
   for (int i = 0; i < 3; i++) {
     os << "[";
     for (int j = 0; j < 3; j++) {
-      os << P(i, j);
+      os << P(i,j);
       if (j != 2) {
         os << ", ";
       }
     }
-    os << "]";
-    if (i != 2) {
-      os << ", ";
-    }
+    os << "]" <<'\n';
   }
-  os << "]";
+  os <<'\n';
   return os;
 }

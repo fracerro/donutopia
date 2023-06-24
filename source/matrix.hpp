@@ -22,6 +22,8 @@ class Matrix {
 
   ftype const& operator()(int, int) const;
   ftype& operator()(int, int);
+
+  Matrix& transposed();
 };
 
 std::ostream& operator<<(std::ostream&, const Matrix&);

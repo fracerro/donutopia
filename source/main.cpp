@@ -6,6 +6,11 @@ int main() {
     Matrix B(3.);
 
     A *= B;
-    std::cout << A << "\n";
+
+    A(0,1) = 9.;
+    A(0,2) = 3.;
+    A(1,2) = 6.;
+
+    std::cout << A.transposed() <<'\n';
     return 0;
 }
