@@ -50,7 +50,7 @@ Matrix& Matrix::operator*=(const ftype lambda) {
 Matrix Matrix::transposed() {
   Matrix tr{};
   for (int i = 0; i < 3; i++) {
-    for (int j = i; j < 3; j++) {
+    for (int j = 0; j < 3; j++) {
       tr(i, j) = mat[i][j];
     }
   }
