@@ -7,10 +7,15 @@ int main() {
 
     A *= B;
 
-    A(0,1) = 9.;
-    A(0,2) = 3.;
-    A(1,2) = 6.;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            A(i, j) = i * 3 + j;
+        }
+    }
 
-    std::cout << A.transposed() <<'\n';
+    std::cout << A << "\n";
+    A.transposed();
+    std::cout << A << "\n";
+    
     return 0;
 }
