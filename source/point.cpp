@@ -18,24 +18,7 @@ ftype Point::norm() {
   return sqrt(pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2]);
 }
 
-Point Point::unitVector() {
-  // TODO
-}
-
-Point Point::toSpherical() {
-  Point pl{*this};
-  pl(0) = this->norm();
-  // TODO
-  return pl;
-}
-
-Point Point::toCartesian() {
-  Point ct{*this};
-  ct(0) = pt[0] * sin(this->pt[1]) * cos(pt[2]);
-  ct(1) = pt[0] * sin(this->pt[1]) * sin(pt[2]);
-  ct(2) = pt[0] * cos(this->pt[1]);
-  return ct;
-}
+Point Point::unitVector() { return (*this) / this->norm(); }
 
 Point& Point::operator+=(const Point& P) {
   for (int i = 0; i < 3; i++) {
@@ -97,4 +80,10 @@ Point operator*(const Matrix& M, const Point& P) {
     }
   }
   return Q;
+}
+
+// r ∈ [0, inf), phi ∈ [0, 2*pi), theta ∈ [0, pi)
+Point fromSpherical(ftype r, ftype phi, ftype theta) {
+  return Point(r * sin(theta) * cos(phi), r * sin(theta) * sin(phi),
+               r * cos(theta));
 }
