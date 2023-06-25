@@ -52,13 +52,13 @@ TEST_CASE("Testing the matrix class") {
     }
   }
 
-    SUBCASE("Testing the transposed function") {
-      A(0,1) = 8.;
-      A(0,2) = 9.;
-      A(1,2) = 10.;
-      A = A.transposed();
-      CHECK(A(1,0) == 8.);
-      CHECK(A(2,0) == 9.);
-      CHECK(A(2,1) == 10.);
-    }
+  SUBCASE("Testing the transposed function") {
+    A(0, 1) = 8.;
+    A(0, 2) = 9.;
+    A(1, 2) = 10.;
+    A = A.transposed();
+    CHECK(A(1, 0) == 8.);
+    CHECK(A(2, 0) == 9.);
+    CHECK(A(2, 1) == 10.);
+  }
 }

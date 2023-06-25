@@ -1,22 +1,12 @@
 #include <iostream>
+
 #include "matrix.hpp"
 
 int main() {
-    Matrix A(2.);
-    Matrix B(3.);
+  Matrix A(2.);
+  Matrix B(3.);
 
-    A *= B;
+  Matrix C = A + B;
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            A(i, j) = i * 3 + j;
-        }
-    }
-
-    std::cout << A << "\n";
-    B = A.transposed();
-    std::cout << A << "\n";
-    std::cout << B << "\n";
-    
-    return 0;
+  return 0;
 }

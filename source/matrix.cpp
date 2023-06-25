@@ -6,6 +6,8 @@ Matrix::Matrix(ftype val) {
   }
 }
 
+// Operators
+
 Matrix& Matrix::operator+=(const Matrix& B) {
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
@@ -47,7 +49,31 @@ Matrix& Matrix::operator*=(const ftype lambda) {
   return *this;
 }
 
-Matrix Matrix::transposed() {
+Matrix operator+(const Matrix& A, const Matrix& B) {
+  Matrix C{A};
+  C += B;
+  return C;
+}
+
+Matrix operator-(const Matrix& A, const Matrix& B) {
+  Matrix C{A};
+  C -= B;
+  return C;
+}
+
+Matrix operator*(const Matrix& A, const Matrix& B) {
+  Matrix C{A};
+  C *= B;
+  return C;
+}
+
+Matrix operator*(const Matrix& A, const ftype lambda) {
+  Matrix C{A};
+  C *= lambda;
+  return C;
+}
+
+Matrix Matrix::transposed() const {
   Matrix tr{};
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
@@ -57,25 +83,21 @@ Matrix Matrix::transposed() {
   return tr;
 }
 
-ftype const& Matrix::operator()(int i, int j) const {
-  return mat[i][j]; 
-}
+ftype const& Matrix::operator()(int i, int j) const { return mat[i][j]; }
 
-ftype& Matrix::operator()(int i, int j) {
-  return mat[i][j];
-}
+ftype& Matrix::operator()(int i, int j) { return mat[i][j]; }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& P) {
   for (int i = 0; i < 3; i++) {
     os << "[";
     for (int j = 0; j < 3; j++) {
-      os << P(i,j);
+      os << P(i, j);
       if (j != 2) {
         os << ", ";
       }
     }
-    os << "]" <<'\n';
+    os << "]" << '\n';
   }
-  os <<'\n';
+  os << '\n';
   return os;
 }

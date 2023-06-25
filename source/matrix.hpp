@@ -23,8 +23,13 @@ class Matrix {
   ftype const& operator()(int, int) const;
   ftype& operator()(int, int);
 
-  Matrix transposed();
+  Matrix transposed() const;
 };
+
+Matrix operator+(const Matrix&, const Matrix&);
+Matrix operator-(const Matrix&, const Matrix&);
+Matrix operator*(const Matrix&, const Matrix&);
+Matrix operator*(const Matrix&, const ftype);
 
 std::ostream& operator<<(std::ostream&, const Matrix&);
 
