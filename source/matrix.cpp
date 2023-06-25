@@ -1,5 +1,7 @@
 #include "matrix.hpp"
 
+#include <cmath>
+
 Matrix::Matrix(ftype val) {
   for (int i = 0; i < 3; i++) {
     mat[i].fill(val);
@@ -100,4 +102,25 @@ std::ostream& operator<<(std::ostream& os, const Matrix& P) {
   }
   os << '\n';
   return os;
+}
+
+// da riscrivere in maniera pulita
+Matrix rotationMatrix(
+    const ftype theta,
+    const Point& v) {  // rotatione di theta attorno al vettore v
+  Matrix rmatrix;
+  auto u = v.unitVector();
+  auto X = u(0);
+  auto Y = u(1);
+  auto Z = u(2);
+  rmatrix(0, 0) = X * X + (1 - X * X) * cos(theta);
+  rmatrix(0, 1) = X * Y * (1 - cos(theta)) - Z * sin(theta);
+  rmatrix(0, 2) = X * Z * (1 - cos(theta)) + Y * sin(theta);
+  rmatrix(1, 0) = X * Y * (1 - cos(theta)) + Z * sin(theta);
+  rmatrix(1, 1) = Y * Y + (1 - Y * Y) * cos(theta);
+  rmatrix(1, 2) = Y * Z * (1 - cos(theta)) - X * sin(theta);
+  rmatrix(2, 0) = X * Z * (1 - cos(theta)) - Y * sin(theta);
+  rmatrix(2, 1) = Y * Z * (1 - cos(theta)) + X * sin(theta);
+  rmatrix(2, 2) = Z * Z + (1 - Z * Z) * cos(theta);
+  return rmatrix;
 }

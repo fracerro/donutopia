@@ -4,7 +4,10 @@
 #include <array>
 #include <ostream>
 
-using ftype = float;
+#include "config.hpp"
+#include "point.hpp"
+
+class Point;
 
 // 3 x 3
 class Matrix {
@@ -32,5 +35,7 @@ Matrix operator*(const Matrix&, const Matrix&);
 Matrix operator*(const Matrix&, const ftype);
 
 std::ostream& operator<<(std::ostream&, const Matrix&);
+
+Matrix rotationMatrix(const ftype, const Point&);
 
 #endif

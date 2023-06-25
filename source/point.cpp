@@ -14,11 +14,11 @@ ftype const& Point::operator()(int i) const { return pt[i]; }
 
 ftype& Point::operator()(int i) { return pt[i]; }
 
-ftype Point::norm() {
+ftype Point::norm() const {
   return sqrt(pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2]);
 }
 
-Point Point::unitVector() { return (*this) / this->norm(); }
+Point Point::unitVector() const { return (*this) / this->norm(); }
 
 Point& Point::operator+=(const Point& P) {
   for (int i = 0; i < 3; i++) {

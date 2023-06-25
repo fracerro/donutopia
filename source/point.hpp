@@ -3,7 +3,10 @@
 
 #include <array>
 
+#include "config.hpp"
 #include "matrix.hpp"
+
+class Matrix;
 
 class Point {
  private:
@@ -17,8 +20,8 @@ class Point {
   ftype const& operator()(int) const;
   ftype& operator()(int);
 
-  ftype norm();
-  Point unitVector();
+  ftype norm() const;
+  Point unitVector() const;
 
   Point& operator+=(const Point&);
   Point& operator-=(const Point&);
