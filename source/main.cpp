@@ -14,8 +14,9 @@ int main() {
     }
 
     std::cout << A << "\n";
-    A.transposed();
+    B = A.transposed();
     std::cout << A << "\n";
+    std::cout << B << "\n";
     
     return 0;
 }

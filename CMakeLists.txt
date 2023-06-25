@@ -19,18 +19,15 @@ string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-fra
 string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-frame-pointer")
 
 add_executable(donutopia source/main.cpp source/matrix.cpp)
-add_executable(matrix.test.t source/matrix.test.cpp source/matrix.cpp)
 
 # se il testing e' abilitato...
 #   per disabilitare il testing, passare -DBUILD_TESTING=OFF a cmake durante la fase di configurazione
 if (BUILD_TESTING)
 
-  # aggiungi l'eseguibile statistics.t
-  # add_executable(hooke.t source/hooke.test.cpp source/hooke.cpp)
-  # add_executable(chain.t source/chain.test.cpp source/chain.cpp source/hooke.cpp)
-  # # aggiungi l'eseguibile statistics.t alla lista dei test
-  # add_test(NAME hooke.t COMMAND hooke.t)
-  # add_test(NAME chain.t COMMAND chain.t)
+  # aggiungi l'eseguibile matrix.test.t
+  add_executable(matrix.test.t  source/matrix.test.cpp source/matrix.cpp)
+  # # aggiungi l'eseguibile matrix.test.t alla lista dei test
+  add_test(NAME matrix.test.t COMMAND matrix.test.t)
 
 endif()
 
