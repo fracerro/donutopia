@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 #include "doctest.h"
-#include "matrix.hpp"
+#include "../matrix.hpp"
 
 TEST_CASE("Testing the matrix class") {  // manca fromSpherical e rotated_Point
   Point a(1.);

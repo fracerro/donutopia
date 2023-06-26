@@ -25,11 +25,11 @@ add_executable(donutopia source/main.cpp source/matrix.cpp source/point.cpp)
 if (BUILD_TESTING)
 
   # aggiungi l'eseguibile matrix.test.t
-  add_executable(matrix.test.t  source/matrix.test.cpp source/matrix.cpp source/point.cpp)
+  add_executable(matrix.test.t  source/test/matrix.test.cpp source/matrix.cpp source/point.cpp)
   # # aggiungi l'eseguibile matrix.test.t alla lista dei test
   add_test(NAME matrix.test.t COMMAND matrix.test.t)
 
-  add_executable(point.test.t  source/point.test.cpp source/matrix.cpp source/point.cpp)
+  add_executable(point.test.t  source/test/point.test.cpp source/matrix.cpp source/point.cpp)
   add_test(NAME point.test.t COMMAND point.test.t)
 
 endif()
