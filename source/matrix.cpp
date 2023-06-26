@@ -105,9 +105,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix& P) {
 }
 
 // da riscrivere in maniera pulita
-Matrix rotationMatrix(
-    const ftype theta,
-    const Point& v) {  // rotatione di theta attorno al vettore v
+Matrix rotationMatrix(const ftype theta, const Point& v) {
   Matrix rmatrix;
   auto u = v.unitVector();
   auto X = u(0);

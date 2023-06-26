@@ -20,8 +20,8 @@ class Matrix {
 
   Matrix& operator+=(const Matrix&);  // matrix sum
   Matrix& operator-=(const Matrix&);  // matrix difference
-  Matrix& operator*=(const Matrix&);  // Matrix product
-  Matrix& operator*=(const ftype);    // Product with a scalar type
+  Matrix& operator*=(const Matrix&);  // matrix rows columns product
+  Matrix& operator*=(const ftype);    // matrix and scalar product
 
   ftype const& operator()(int, int) const;
   ftype& operator()(int, int);
@@ -34,8 +34,10 @@ Matrix operator-(const Matrix&, const Matrix&);
 Matrix operator*(const Matrix&, const Matrix&);
 Matrix operator*(const Matrix&, const ftype);
 
-std::ostream& operator<<(std::ostream&, const Matrix&);
+std::ostream& operator<<(std::ostream&, const Matrix&);  // output for a matrix
 
-Matrix rotationMatrix(const ftype, const Point&);
-
+Matrix rotationMatrix(
+    const ftype,
+    const Point&);  // given theta and a x,y,z vector, returns the rotation by
+                    // theta matrix along the normalized vector
 #endif

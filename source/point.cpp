@@ -18,6 +18,10 @@ ftype Point::norm() const {
   return sqrt(pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2]);
 }
 
+ftype Point::norm_squared() const {
+  return pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2];
+}
+
 Point Point::unitVector() const { return (*this) / this->norm(); }
 
 Point& Point::operator+=(const Point& P) {
@@ -98,4 +102,9 @@ Point cross(const Point& P, const Point& Q) {
   R(1) = P(2) * Q(0) - P(0) * Q(2);
   R(2) = P(0) * Q(1) - P(1) * Q(0);
   return R;
+}
+
+Point rotated_Point(const ftype theta, const Point& v) {
+  Point R;
+  return rotationMatrix(theta, v) * R;
 }
