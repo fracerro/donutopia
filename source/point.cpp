@@ -72,7 +72,7 @@ Point operator*(const Point& P, const ftype lambda) {
 
 Point operator/(const Point& P, const ftype lambda) {
   Point R{P};
-  R *= lambda;
+  R /= lambda;
   return R;
 }
 
@@ -84,6 +84,13 @@ Point operator*(const Matrix& M, const Point& P) {
     }
   }
   return Q;
+}
+
+bool operator==(const Point& P, const Point& Q) {
+  if(P(0) == Q(0) && P(1) == Q(1) && P(2) == Q(2)) {
+    return true;
+  }
+  return false;
 }
 
 // r ∈ [0, inf), phi ∈ [0, 2*pi), theta ∈ [0, pi)
@@ -104,7 +111,6 @@ Point cross(const Point& P, const Point& Q) {
   return R;
 }
 
-Point rotated_Point(const ftype theta, const Point& v) {
-  Point R;
-  return rotationMatrix(theta, v) * R;
+Point rotated_Point(const Point& P, const ftype theta, const Point& v) {
+  return rotationMatrix(theta, v) * P;
 }

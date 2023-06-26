@@ -29,5 +29,8 @@ if (BUILD_TESTING)
   # # aggiungi l'eseguibile matrix.test.t alla lista dei test
   add_test(NAME matrix.test.t COMMAND matrix.test.t)
 
+  add_executable(point.test.t  source/point.test.cpp source/matrix.cpp source/point.cpp)
+  add_test(NAME point.test.t COMMAND point.test.t)
+
 endif()
 
