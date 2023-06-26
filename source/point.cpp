@@ -18,7 +18,7 @@ ftype Point::norm() const {
   return sqrt(pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2]);
 }
 
-ftype Point::norm_squared() const {
+ftype Point::normSquared() const {
   return pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2];
 }
 
@@ -87,7 +87,7 @@ Point operator*(const Matrix& M, const Point& P) {
 }
 
 bool operator==(const Point& P, const Point& Q) {
-  if(P(0) == Q(0) && P(1) == Q(1) && P(2) == Q(2)) {
+  if (P(0) == Q(0) && P(1) == Q(1) && P(2) == Q(2)) {
     return true;
   }
   return false;
@@ -111,6 +111,6 @@ Point cross(const Point& P, const Point& Q) {
   return R;
 }
 
-Point rotated_Point(const Point& P, const ftype theta, const Point& v) {
+Point rotatedPoint(const Point& P, const ftype theta, const Point& v) {
   return rotationMatrix(theta, v) * P;
 }

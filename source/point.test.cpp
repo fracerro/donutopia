@@ -3,7 +3,7 @@
 #include "doctest.h"
 #include "matrix.hpp"
 
-TEST_CASE("Testing the matrix class") { //manca fromSpherical e rotated_Point
+TEST_CASE("Testing the matrix class") {  // manca fromSpherical e rotated_Point
   Point a(1.);
   Point b(1., 2., 3.);
   Point c{b};
@@ -47,7 +47,7 @@ TEST_CASE("Testing the matrix class") { //manca fromSpherical e rotated_Point
   SUBCASE("Testing norm, norm_squared and unitVector functions") {
     lambda = b.norm();
     CHECK(lambda == doctest::Approx(3.74165738677));
-    lambda = b.norm_squared();
+    lambda = b.normSquared();
     CHECK(lambda == 14);
     c = b.unitVector();
     CHECK(c(0) == doctest::Approx(0.26726124191));
@@ -55,13 +55,13 @@ TEST_CASE("Testing the matrix class") { //manca fromSpherical e rotated_Point
     CHECK(c(2) == doctest::Approx(0.80178372573));
   }
   SUBCASE("Testing dot and cross products functions") {
-    lambda = dot(a,b);
+    lambda = dot(a, b);
     CHECK(lambda == 6);
-    c = cross(a,b);
+    c = cross(a, b);
     CHECK(c(0) == 1);
     CHECK(c(1) == -2);
     CHECK(c(2) == 1);
-    c = cross(b,a);
+    c = cross(b, a);
     CHECK(c(0) == -1);
     CHECK(c(1) == 2);
     CHECK(c(2) == -1);

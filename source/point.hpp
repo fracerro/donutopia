@@ -20,9 +20,9 @@ class Point {  // x,y,z vector
   ftype const& operator()(int) const;
   ftype& operator()(int);
 
-  ftype norm() const;               // returns the norm of the vector
-  ftype norm_squared() const;       // returns the square of norm
-  Point unitVector() const;         // Normalizes the vector
+  ftype norm() const;         // returns the norm of the vector
+  ftype normSquared() const;  // returns the square of norm
+  Point unitVector() const;   // Normalizes the vector
 
   Point& operator+=(const Point&);  // vector sum
   Point& operator-=(const Point&);  // vector difference
@@ -36,7 +36,7 @@ Point operator*(const Point&, const ftype);
 Point operator/(const Point&, const ftype);
 Point operator*(const Matrix&,
                 const Point&);  // Product for a matrix and a vector
-bool operator==(const Point&, const Point&); //operator to compare vectors
+bool operator==(const Point&, const Point&);  // operator to compare vectors
 
 Point fromSpherical(
     ftype, ftype,
@@ -46,7 +46,8 @@ ftype dot(const Point&, const Point&);  // dot product (returns an ftype value)
 Point cross(const Point&,
             const Point&);  // cross product (returns a Point vector)
 
-Point rotated_Point(const Point&, const ftype,
-                    const Point&);  // given the point P, theta angle and the vector v, rotates P around v by theta
+Point rotatedPoint(const Point&, const ftype,
+                   const Point&);  // given the point P, theta angle and the
+                                   // vector v, rotates P around v by theta
 
 #endif
