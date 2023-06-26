@@ -5,7 +5,7 @@
 #include "doctest.h"
 
 TEST_CASE("Testing the matrix class") { //manca rotationMatrix
-  Matrix A(4.);  // This tests if the ftype filler constructor workss
+  Matrix A(4.);  // This tests if the ftype filler constructor works
   Matrix A_{A};
   
   for (int i = 0; i < 3; i++) {

@@ -51,6 +51,15 @@ Matrix& Matrix::operator*=(const ftype lambda) {
   return *this;
 }
 
+Matrix& Matrix::operator/=(const ftype lambda) {
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      mat[i][j] /= lambda;
+    }
+  }
+  return *this;
+}
+
 Matrix operator+(const Matrix& A, const Matrix& B) {
   Matrix C{A};
   C += B;
@@ -72,6 +81,12 @@ Matrix operator*(const Matrix& A, const Matrix& B) {
 Matrix operator*(const Matrix& A, const ftype lambda) {
   Matrix C{A};
   C *= lambda;
+  return C;
+}
+
+Matrix operator/(const Matrix& A, const ftype lambda) {
+  Matrix C{A};
+  C /= lambda;
   return C;
 }
 

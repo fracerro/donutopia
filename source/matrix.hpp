@@ -22,6 +22,7 @@ class Matrix {
   Matrix& operator-=(const Matrix&);  // matrix difference
   Matrix& operator*=(const Matrix&);  // matrix rows columns product
   Matrix& operator*=(const ftype);    // matrix and scalar product
+  Matrix& operator/=(const ftype);    // matrix and scalar division
 
   ftype const& operator()(int, int) const;
   ftype& operator()(int, int);
@@ -33,6 +34,7 @@ Matrix operator+(const Matrix&, const Matrix&);
 Matrix operator-(const Matrix&, const Matrix&);
 Matrix operator*(const Matrix&, const Matrix&);
 Matrix operator*(const Matrix&, const ftype);
+Matrix operator/(const Matrix&, const ftype);
 
 std::ostream& operator<<(std::ostream&, const Matrix&);  // output for a matrix
 
