@@ -37,4 +37,7 @@ Point operator*(const Matrix&, const Point&);
 
 Point fromSpherical(ftype, ftype, ftype);
 
+ftype dot(const Point&, const Point&);
+Point cross(const Point&, const Point&);
+
 #endif

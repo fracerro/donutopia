@@ -87,3 +87,15 @@ Point fromSpherical(ftype r, ftype phi, ftype theta) {
   return Point(r * sin(theta) * cos(phi), r * sin(theta) * sin(phi),
                r * cos(theta));
 }
+
+ftype dot(const Point& P, const Point& Q) {
+  return P(0) * Q(0) + P(1) * Q(1) + P(2) * Q(2);
+}
+
+Point cross(const Point& P, const Point& Q) {
+  Point R{};
+  R(0) = P(1) * Q(2) - P(2) * Q(1);
+  R(1) = P(2) * Q(0) - P(0) * Q(2);
+  R(2) = P(0) * Q(1) - P(1) * Q(0);
+  return R;
+}
