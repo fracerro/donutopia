@@ -2,6 +2,7 @@
 #define POINT_HPP
 
 #include <array>
+#include <ostream>
 
 #include "config.hpp"
 #include "matrix.hpp"
@@ -49,5 +50,7 @@ Point cross(const Point&,
 Point rotatedPoint(const Point&, const ftype,
                    const Point&);  // given the point P, theta angle and the
                                    // vector v, rotates P around v by theta
+
+std::ostream& operator<<(std::ostream&, const Point&);  // output for a point
 
 #endif

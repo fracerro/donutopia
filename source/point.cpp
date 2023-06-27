@@ -114,3 +114,8 @@ Point cross(const Point& P, const Point& Q) {
 Point rotatedPoint(const Point& P, const ftype theta, const Point& v) {
   return rotationMatrix(theta, v) * P;
 }
+
+std::ostream& operator<<(std::ostream& os, const Point& P) {
+  os << "(" << P(0) << ", " << P(1) << ", " << P(2) << ")";
+  return os;
+}

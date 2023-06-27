@@ -16,6 +16,8 @@ class Camera {
   int pixelY{};
   ftype fov{};  // filed of view over X axis
 
+  Point normalVector;
+
  public:
   Camera() = default;
   Camera(const Point&, ftype, ftype, ftype, int, int, ftype);
@@ -23,6 +25,8 @@ class Camera {
   const int getPixelX() const;
   const int getPixelY() const;
   const ftype getFov() const;
+  const Point& getNormalVector() const;
+  const Point& getPosition() const;
 };
 
 #endif

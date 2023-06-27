@@ -23,8 +23,12 @@ Camera::Camera(const Point& _position, ftype _phi, ftype _theta, ftype _psi,
   if (pixelX >= maxPixel || pixelY >= maxPixel) {
     throw std::runtime_error(error_msg.c_str());
   }
+
+  normalVector = fromSpherical(1., phi, theta);
 }
 
 const int Camera::getPixelX() const { return pixelX; }
 const int Camera::getPixelY() const { return pixelY; }
 const ftype Camera::getFov() const { return fov; }
+const Point& Camera::getNormalVector() const { return normalVector; }
+const Point& Camera::getPosition() const { return position; }
