@@ -4,8 +4,8 @@
 #include <vector>
 
 #include "camera.hpp"
-#include "donut.hpp"
+#include "shape.hpp"
 
-std::vector<RGB> render(const Camera&, const std::vector<donut>&, RGB);
+std::vector<RGB> render(const Camera&, const std::vector<Point>&, RGB);
 
 #endif

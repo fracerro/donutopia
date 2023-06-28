@@ -1,5 +1,5 @@
 #include "render.hpp"
-
+#include "solid.hpp"
 #include <cmath>
 #include <limits>
 
@@ -38,12 +38,12 @@ int projectPoint(const Camera& cam, const Point& P) {
   }
 }
 
-std::vector<RGB> render(const Camera& cam, const std::vector<donut>& obj,
+std::vector<RGB> render(const Camera& cam, const std::vector<Point>& obj,
                         RGB backgroundColor) {
   std::vector<RGB> image(cam.getPixelX() * cam.getPixelY(), backgroundColor);
   std::vector<ftype> distances(cam.getPixelX() * cam.getPixelY(),
                                std::numeric_limits<ftype>::max());
-  for (const donut& sprite : obj) {
+  for ( const Shape& sprite : obj) {
     std::vector<Point> points = sprite.getPoints();
     for (const Point& P : points) {
       //  check if the point is in front of the camera, if not skip iteration

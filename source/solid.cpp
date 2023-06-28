@@ -1,17 +1,18 @@
-#include "donut.hpp"
+#include "solid.hpp"
+#include "shape.hpp"
 
 #include <cmath>
 
 #include "config.hpp"
 #include "matrix.hpp"
 
-void donut::shift(Point P) { CDM += P; }
+void Donut::shift(Point P) { CDM += P; }
 
-void donut::set_cdm(Point P) { CDM = P; }
+void Donut::set_cdm(Point P) { CDM = P; }
 
-void donut::rotate(Point P) { orientation += P; }
+void Donut::rotate(Point P) { orientation += P; }
 
-std::vector<Point> donut::getPoints() const {
+std::vector<Point> Donut::getPoints() const {
   std::vector<Point> points{};
   for (int i = 0; i < ALPHA_POINTS; i++) {
     float a = 2 * M_PI * i / ALPHA_POINTS;
@@ -30,4 +31,4 @@ std::vector<Point> donut::getPoints() const {
   return points;
 }
 
-RGB donut::getColor() const { return color; }
+RGB Donut::getColor() const { return color; }
