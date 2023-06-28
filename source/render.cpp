@@ -38,12 +38,41 @@ int projectPoint(const Camera& cam, const Point& P) {
   }
 }
 
+/*              RENDER FOR DONUTS
 std::vector<RGB> render(const Camera& cam, const std::vector<donut>& obj,
                         RGB backgroundColor) {
   std::vector<RGB> image(cam.getPixelX() * cam.getPixelY(), backgroundColor);
   std::vector<ftype> distances(cam.getPixelX() * cam.getPixelY(),
                                std::numeric_limits<ftype>::max());
   for (const donut& sprite : obj) {
+    std::vector<Point> points = sprite.getPoints();
+    for (const Point& P : points) {
+      //  check if the point is in front of the camera, if not skip iteration
+      if (dot(P - cam.getPosition(), cam.getNormalVector()) <= 0.) {
+        continue;
+      }
+
+      int projection = projectPoint(cam, P);
+      if (projection == -1) {
+        continue;
+      }
+
+      if ((P - cam.getPosition()).normSquared() < distances[projection]) {
+        distances[projection] = (P - cam.getPosition()).normSquared();
+        image[projection] = sprite.getColor();
+      }
+    }
+  }
+  return image;
+}
+*/
+
+std::vector<RGB> render(const Camera& cam, const std::vector<axis>& obj,
+                        RGB backgroundColor) {
+  std::vector<RGB> image(cam.getPixelX() * cam.getPixelY(), backgroundColor);
+  std::vector<ftype> distances(cam.getPixelX() * cam.getPixelY(),
+                               std::numeric_limits<ftype>::max());
+  for (const axis& sprite : obj) {
     std::vector<Point> points = sprite.getPoints();
     for (const Point& P : points) {
       //  check if the point is in front of the camera, if not skip iteration
