@@ -1,7 +1,9 @@
 #include "render.hpp"
-#include "solid.hpp"
+
 #include <cmath>
 #include <limits>
+
+#include "solid.hpp"
 
 /*
 
@@ -18,13 +20,13 @@ steps:
 int projectPoint(const Camera& cam, const Point& P) {
   Point intersection = (P - cam.getPosition()) /
                        dot(P - cam.getPosition(), cam.getNormalVector());
-  Point relativePosition = 
-      rotatedPoint(intersection,
-                   acos(dot(cam.getNormalVector(), Point(0., 0., 1.))),
-                   cross(cam.getNormalVector(), Point(0., 0., 1.)));
+  Point relativePosition = rotatedPoint(
+      intersection, acos(dot(cam.getNormalVector(), Point(0., 0., 1.))),
+      cross(cam.getNormalVector(), Point(0., 0., 1.)));
 
   // manage psi
-  relativePosition = rotatedPoint(relativePosition, cam.getPsi(), Point(0., 0., 1.));
+  relativePosition =
+      rotatedPoint(relativePosition, cam.getPsi(), Point(0., 0., 1.));
 
   ftype scaleFactor = cam.getPixelX() / (2. * tan(cam.getFov() / 2.));
   relativePosition *= scaleFactor;
@@ -38,16 +40,16 @@ int projectPoint(const Camera& cam, const Point& P) {
   }
 }
 
-std::vector<RGB> render(const Camera& cam, const std::vector<Point>& obj,
+std::vector<RGB> render(const Camera& cam, const std::vector<Shape*>& obj,
                         RGB backgroundColor) {
   std::vector<RGB> image(cam.getPixelX() * cam.getPixelY(), backgroundColor);
   std::vector<ftype> distances(cam.getPixelX() * cam.getPixelY(),
                                std::numeric_limits<ftype>::max());
-  for ( const Shape& sprite : obj) {
-    std::vector<Point> points = sprite.getPoints();
+  for (const Shape* sprite : obj) {
+    std::vector<Point> points = sprite->getPoints();
     for (const Point& P : points) {
       //  check if the point is in front of the camera, if not skip iteration
-      if (dot(P - cam.getPosition(), cam.getNormalVector()) <= 0.) {
+      if (std::signbit(dot(P - cam.getPosition(), cam.getNormalVector()))) {
         continue;
       }
 
@@ -58,7 +60,7 @@ std::vector<RGB> render(const Camera& cam, const std::vector<Point>& obj,
 
       if ((P - cam.getPosition()).normSquared() < distances[projection]) {
         distances[projection] = (P - cam.getPosition()).normSquared();
-        image[projection] = sprite.getColor();
+        image[projection] = sprite->getColor();
       }
     }
   }

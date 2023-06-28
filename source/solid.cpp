@@ -1,10 +1,10 @@
 #include "solid.hpp"
-#include "shape.hpp"
 
 #include <cmath>
 
 #include "config.hpp"
 #include "matrix.hpp"
+#include "shape.hpp"
 
 void Donut::shift(Point P) { CDM += P; }
 
