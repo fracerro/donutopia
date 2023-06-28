@@ -25,6 +25,7 @@ class Camera {
   const int getPixelX() const;
   const int getPixelY() const;
   const ftype getFov() const;
+  const ftype getPsi() const;
   const Point& getNormalVector() const;
   const Point& getPosition() const;
 };

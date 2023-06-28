@@ -121,8 +121,17 @@ std::ostream& operator<<(std::ostream& os, const Matrix& P) {
 
 // da riscrivere in maniera pulita
 Matrix rotationMatrix(const ftype theta, const Point& v) {
-  Matrix rmatrix;
+  // rewrite later
+  if (v.normSquared() == 0.) {
+    Matrix identity{0};
+    for (int i = 0; i < 3; i++) {
+      identity(i, i) = 1.;
+    }
+    return identity;
+  }
+
   auto u = v.unitVector();
+  Matrix rmatrix{};
   auto X = u(0);
   auto Y = u(1);
   auto Z = u(2);

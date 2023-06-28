@@ -111,6 +111,7 @@ Point cross(const Point& P, const Point& Q) {
   return R;
 }
 
+#include <iostream>
 Point rotatedPoint(const Point& P, const ftype theta, const Point& v) {
   return rotationMatrix(theta, v) * P;
 }

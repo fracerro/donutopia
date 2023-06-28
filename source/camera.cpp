@@ -30,5 +30,6 @@ Camera::Camera(const Point& _position, ftype _phi, ftype _theta, ftype _psi,
 const int Camera::getPixelX() const { return pixelX; }
 const int Camera::getPixelY() const { return pixelY; }
 const ftype Camera::getFov() const { return fov; }
+const ftype Camera::getPsi() const { return psi; }
 const Point& Camera::getNormalVector() const { return normalVector; }
 const Point& Camera::getPosition() const { return position; }
