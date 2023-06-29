@@ -1,2 +1,6 @@
 .vscode
 build
+visualize/create_image
+visualize/data.txt
+visualize/image.png
+
