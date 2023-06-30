@@ -93,8 +93,8 @@ bool operator==(const Point& P, const Point& Q) {
   return false;
 }
 
-// r ∈ [0, inf), phi ∈ [0, 2*pi), theta ∈ [0, pi)
-Point fromSpherical(ftype r, ftype phi, ftype theta) {
+// r ∈ [0, inf), theta ∈ [0, pi), phi ∈ [0, 2*pi)
+Point fromSpherical(ftype r, ftype theta, ftype phi) {
   return Point(r * sin(theta) * cos(phi), r * sin(theta) * sin(phi),
                r * cos(theta));
 }

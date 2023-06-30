@@ -18,7 +18,7 @@ class donut {
  public:
   donut() = default;
   donut(ftype R_, ftype r_, int alpha_, int beta_, RGB _color)
-      : r(r_), R(R_), ALPHA_POINTS(alpha_), BETA_POINTS(beta_), color(_color) {}
+      : R(R_), r(r_), ALPHA_POINTS(alpha_), BETA_POINTS(beta_), color(_color) {}
 
   void shift(Point);
   void set_cdm(Point);
