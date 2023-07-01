@@ -33,8 +33,6 @@ std::vector<Point> Donut::getPoints() const {
 
 RGB Donut::getColor() const { return color; }
 
-
-
 void Ellipsoid::shift(Point P) { CDM += P; }
 
 void Ellipsoid::set_cdm(Point P) { CDM = P; }
@@ -47,9 +45,8 @@ std::vector<Point> Ellipsoid::getPoints() const {
     float a = M_PI * i / ALPHA_POINTS;
     for (int j = 0; j < BETA_POINTS; j++) {
       float b = 2 * M_PI * j / BETA_POINTS;
-      Point p(A*sin(a)*cos(b), B*sin(A)*cos(B), C*cos(A));
- 
- 
+      Point p(A * sin(a) * cos(b), B * sin(a) * sin(b), C * cos(a));
+
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
       p = rotatedPoint(p, orientation(2), Point(0., 0., 1.));
