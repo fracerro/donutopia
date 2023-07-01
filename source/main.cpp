@@ -17,7 +17,9 @@ int main() {
   don2.set_cdm(Point(0, 20, 60));
   don2.rotate(Point(M_PI_2, 0., 0.));
   // don.rotate(Point(1., 0.3, -0.8));
-
+  Ellipsoid elly1(8.,9.,10.,100,100, RGB(120,120,120));
+  elly1.set_cdm(Point(5.,7.,11.));
+  elly1.rotate(Point (0., 0., M_PI_2));
   std::vector<Shape*> sprites{};
   sprites.push_back(&don);
   sprites.push_back(&don2);
