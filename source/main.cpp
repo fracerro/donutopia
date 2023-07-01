@@ -21,13 +21,14 @@ int main() {
   elly1.set_cdm(Point(5., 7., 11.));
   elly1.rotate(Point(0., M_PI_2, 0.));
  
-  Cylinder cil1(20., 40., 100, RGB(104, 120, 0));
+  Cylinder cil1(20., 40., 1000, 1000, RGB(155, 155, 155));
   cil1.set_cdm(Point(0.,30.,50.));
   cil1.rotate(Point(M_PI_2,M_PI_2,M_PI_2));
   std::vector<Shape*> sprites{};
   sprites.push_back(&don);
   sprites.push_back(&don2);
   sprites.push_back(&elly1);
+  sprites.push_back(&cil1);
   auto res = render(cam, sprites, RGB(128, 128, 128));
 
   std::ofstream outFile("../visualize/data.txt");

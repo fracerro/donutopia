@@ -1,7 +1,7 @@
 all: compile run
 
 compile:
-	g++ create_image.cpp -o create_image -lsfml-graphics
+	g++ create_image.cpp -o create_image -lsfml-graphics -lsfml-window -lsfml-system
 	make -C ../build
 	../build/donutopia
 
