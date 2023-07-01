@@ -20,6 +20,10 @@ int main() {
   Ellipsoid elly1(8., 9., 10., 1000, 1000, RGB(0, 255, 0));
   elly1.set_cdm(Point(5., 7., 11.));
   elly1.rotate(Point(0., M_PI_2, 0.));
+ 
+  Cylinder cil1(20., 40., 100, RGB(104, 120, 0));
+  cil1.set_cdm(Point(0.,30.,50.));
+  cil1.rotate(Point(M_PI_2,M_PI_2,M_PI_2));
   std::vector<Shape*> sprites{};
   sprites.push_back(&don);
   sprites.push_back(&don2);

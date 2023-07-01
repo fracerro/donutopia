@@ -43,4 +43,22 @@ class Ellipsoid : public Shape {
   RGB getColor() const override;
 };
 
+class Cylinder : public Shape {
+  ftype R{};
+  ftype h{};
+  int ALPHA_POINTS{};
+  Point CDM{}, orientation{};
+  RGB color;
+
+  public:
+  Cylinder()= default;
+  Cylinder(ftype R_, ftype h_, int alpha_, RGB _color)
+  : R(R_), h(h_), ALPHA_POINTS(alpha_), color(_color) {}
+   void shift(Point);
+  void set_cdm(Point);
+  void rotate(Point);
+  std::vector<Point> getPoints() const override;
+  RGB getColor() const override;
+};
+  
 #endif

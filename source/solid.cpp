@@ -58,3 +58,27 @@ std::vector<Point> Ellipsoid::getPoints() const {
   return points;
 }
 RGB Ellipsoid::getColor() const { return color; }
+
+void Cylinder::shift(Point P) { CDM += P; }
+
+void Cylinder::set_cdm(Point P) { CDM = P; }
+
+void Cylinder::rotate(Point P) { orientation += P; }
+
+std::vector<Point> Cylinder::getPoints() const {
+  std::vector<Point> points{};
+  for (int i = 0; i < ALPHA_POINTS; i++) {
+    float a = 2*M_PI * i / ALPHA_POINTS;
+    Point p(R*cos(a), R*sin(a), h);
+    
+    p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
+      p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
+      p = rotatedPoint(p, orientation(2), Point(0., 0., 1.));
+
+      p += CDM;
+      points.push_back(p);
+    }
+  
+  return points;
+}
+RGB Cylinder::getColor() const { return color; }
