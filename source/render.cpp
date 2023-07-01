@@ -18,6 +18,7 @@ steps:
 #include <iostream>  // REMOVE AFTER TESTING
 
 int projectPoint(const Camera& cam, const Point& P) {
+  /*
   Point intersection = (P - cam.getPosition()) /
                        dot(P - cam.getPosition(), cam.getNormalVector());
   Point relativePosition = rotatedPoint(
@@ -27,6 +28,20 @@ int projectPoint(const Camera& cam, const Point& P) {
   // manage psi
   relativePosition =
       rotatedPoint(relativePosition, cam.getPsi(), Point(0., 0., 1.));
+  */
+
+  ftype lambda = 1. / dot(P - cam.getPosition(), cam.getNormalVector());
+  Point intersection = (P - cam.getPosition()) * lambda - cam.getNormalVector();
+  Point dir_x(sin(cam.getPhi()), -cos(cam.getPhi()), 0.);
+  Point relativePosition = rotatedPoint(
+      intersection, acos(dot(cam.getNormalVector(), Point(0., 0., 1.))), dir_x);
+
+  ftype angle = acos(dot(dir_x, Point(1., 0., 0.)));
+  if (std::signbit(cross(Point(1., 0., 0.), dir_x)(2))) {
+    angle = -angle;
+  }
+  relativePosition =
+      rotatedPoint(relativePosition, cam.getPsi() - angle, Point(0., 0., 1.));
 
   ftype scaleFactor = cam.getPixelX() / (2. * tan(cam.getFov() / 2.));
   relativePosition *= scaleFactor;
@@ -78,7 +93,7 @@ std::vector<RGB> render(const Camera& cam, const std::vector<axis>& obj,
     std::vector<Point> points = sprite.getPoints();
     for (const Point& P : points) {
       //  check if the point is in front of the camera, if not skip iteration
-      std::cout << cam.getNormalVector() << "\n";
+      // std::cout << cam.getNormalVector() << "\n";
       if (dot(P - cam.getPosition(), cam.getNormalVector()) <= 0.) {
         continue;
       }

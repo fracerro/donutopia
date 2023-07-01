@@ -43,11 +43,12 @@ Point fromSpherical(
     ftype, ftype,
     ftype);  // given radius, angle from x axis (on x,y plane), angle from z
              // axis returns the x,y,z coordinates vector
+Point sphericalUnitVector(ftype, ftype, ftype);
 ftype dot(const Point&, const Point&);  // dot product (returns an ftype value)
 Point cross(const Point&,
             const Point&);  // cross product (returns a Point vector)
 
-Point rotatedPoint(const Point&, const ftype,
+Point rotatedPoint(const Point&, ftype,
                    const Point&);  // given the point P, theta angle and the
                                    // vector v, rotates P around v by theta
 

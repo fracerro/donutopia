@@ -120,7 +120,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix& P) {
 }
 
 // da riscrivere in maniera pulita
-Matrix rotationMatrix(const ftype theta, const Point& v) {
+Matrix rotationMatrix(ftype theta, const Point& v) {
   // rewrite later
   if (v.normSquared() == 0.) {
     Matrix identity{0};

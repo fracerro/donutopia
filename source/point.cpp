@@ -99,6 +99,21 @@ Point fromSpherical(ftype r, ftype theta, ftype phi) {
                r * cos(theta));
 }
 
+Point sphericalUnitVector(ftype r, ftype theta, ftype phi) {
+  Matrix M;
+  M(0, 0) = sin(theta) * cos(phi);
+  M(0, 1) = sin(theta) * sin(phi);
+  M(0, 2) = cos(theta);
+  M(1, 0) = cos(theta) * cos(phi);
+  M(1, 1) = cos(theta) * sin(phi);
+  M(1, 2) = -sin(theta);
+  M(2, 0) = -sin(phi);
+  M(2, 1) = cos(phi);
+  M(2, 2) = 0.;
+  Point sph(r, theta, phi);
+  return M * sph;
+}
+
 ftype dot(const Point& P, const Point& Q) {
   return P(0) * Q(0) + P(1) * Q(1) + P(2) * Q(2);
 }
@@ -111,8 +126,7 @@ Point cross(const Point& P, const Point& Q) {
   return R;
 }
 
-#include <iostream>
-Point rotatedPoint(const Point& P, const ftype theta, const Point& v) {
+Point rotatedPoint(const Point& P, ftype theta, const Point& v) {
   return rotationMatrix(theta, v) * P;
 }
 
