@@ -22,12 +22,14 @@ class Camera {
   Camera() = default;
   Camera(const Point&, ftype, ftype, ftype, int, int, ftype);
 
-  const int getPixelX() const;
-  const int getPixelY() const;
-  const ftype getFov() const;
-  const ftype getPsi() const;
-  const Point& getNormalVector() const;
-  const Point& getPosition() const;
+  int getPixelX() const;
+  int getPixelY() const;
+  ftype getFov() const;
+  ftype getPsi() const;
+  ftype getPhi() const;
+  ftype getTheta() const;
+  Point getNormalVector() const;
+  Point getPosition() const;
 };
 
 #endif

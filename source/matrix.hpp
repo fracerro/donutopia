@@ -39,7 +39,7 @@ Matrix operator/(const Matrix&, const ftype);
 std::ostream& operator<<(std::ostream&, const Matrix&);  // output for a matrix
 
 Matrix rotationMatrix(
-    const ftype,
+    ftype,
     const Point&);  // given theta and a x,y,z vector, returns the rotation by
                     // theta matrix along the normalized vector
 #endif

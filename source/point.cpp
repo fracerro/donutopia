@@ -1,6 +1,7 @@
 #include "point.hpp"
 
 #include <cmath>
+#include <stdexcept>
 
 Point::Point(ftype val) { pt.fill(val); }
 
@@ -22,7 +23,12 @@ ftype Point::normSquared() const {
   return pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2];
 }
 
-Point Point::unitVector() const { return (*this) / this->norm(); }
+Point Point::unitVector() const {
+  if (this->normSquared() == 0.) {
+    throw std::runtime_error("Called Point::unitVector from a null point.");
+  }
+  return (*this) / this->norm();
+}
 
 Point& Point::operator+=(const Point& P) {
   for (int i = 0; i < 3; i++) {
@@ -93,10 +99,25 @@ bool operator==(const Point& P, const Point& Q) {
   return false;
 }
 
-// r ∈ [0, inf), phi ∈ [0, 2*pi), theta ∈ [0, pi)
-Point fromSpherical(ftype r, ftype phi, ftype theta) {
+// r ∈ [0, inf), theta ∈ [0, pi), phi ∈ [0, 2*pi)
+Point fromSpherical(ftype r, ftype theta, ftype phi) {
   return Point(r * sin(theta) * cos(phi), r * sin(theta) * sin(phi),
                r * cos(theta));
+}
+
+Point sphericalUnitVector(ftype r, ftype theta, ftype phi) {
+  Matrix M;
+  M(0, 0) = sin(theta) * cos(phi);
+  M(0, 1) = sin(theta) * sin(phi);
+  M(0, 2) = cos(theta);
+  M(1, 0) = cos(theta) * cos(phi);
+  M(1, 1) = cos(theta) * sin(phi);
+  M(1, 2) = -sin(theta);
+  M(2, 0) = -sin(phi);
+  M(2, 1) = cos(phi);
+  M(2, 2) = 0.;
+  Point sph(r, theta, phi);
+  return M * sph;
 }
 
 ftype dot(const Point& P, const Point& Q) {
@@ -111,8 +132,7 @@ Point cross(const Point& P, const Point& Q) {
   return R;
 }
 
-#include <iostream>
-Point rotatedPoint(const Point& P, const ftype theta, const Point& v) {
+Point rotatedPoint(const Point& P, ftype theta, const Point& v) {
   return rotationMatrix(theta, v) * P;
 }
 

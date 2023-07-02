@@ -1,14 +1,13 @@
 #include "matrix.hpp"
 
 #include <cmath>
+#include <stdexcept>
 
 Matrix::Matrix(ftype val) {
   for (int i = 0; i < 3; i++) {
     mat[i].fill(val);
   }
 }
-
-// Operators
 
 Matrix& Matrix::operator+=(const Matrix& B) {
   for (int i = 0; i < 3; i++) {
@@ -119,15 +118,10 @@ std::ostream& operator<<(std::ostream& os, const Matrix& P) {
   return os;
 }
 
-// da riscrivere in maniera pulita
-Matrix rotationMatrix(const ftype theta, const Point& v) {
-  // rewrite later
+Matrix rotationMatrix(ftype theta, const Point& v) {
   if (v.normSquared() == 0.) {
-    Matrix identity{0};
-    for (int i = 0; i < 3; i++) {
-      identity(i, i) = 1.;
-    }
-    return identity;
+    throw std::runtime_error(
+        "Execution aborted beacuse rotationMatrix can't accept null vector.");
   }
 
   auto u = v.unitVector();

@@ -5,7 +5,8 @@
 
 const int maxPixel = 4096;
 
-Camera::Camera(const Point& _position, ftype _phi, ftype _theta, ftype _psi,
+Camera::Camera(const Point& _position, ftype _theta, ftype _phi, ftype _psi,
+
                int _pixelX, int _pixelY, ftype _fov)
     : position(_position),
       phi(_phi),
@@ -24,12 +25,14 @@ Camera::Camera(const Point& _position, ftype _phi, ftype _theta, ftype _psi,
     throw std::runtime_error(error_msg.c_str());
   }
 
-  normalVector = fromSpherical(1., phi, theta);
+  normalVector = fromSpherical(1., theta, phi);
 }
 
-const int Camera::getPixelX() const { return pixelX; }
-const int Camera::getPixelY() const { return pixelY; }
-const ftype Camera::getFov() const { return fov; }
-const ftype Camera::getPsi() const { return psi; }
-const Point& Camera::getNormalVector() const { return normalVector; }
-const Point& Camera::getPosition() const { return position; }
+int Camera::getPixelX() const { return pixelX; }
+int Camera::getPixelY() const { return pixelY; }
+ftype Camera::getFov() const { return fov; }
+ftype Camera::getPsi() const { return psi; }
+ftype Camera::getTheta() const { return theta; }
+ftype Camera::getPhi() const { return phi; }
+Point Camera::getNormalVector() const { return normalVector; }
+Point Camera::getPosition() const { return position; }
