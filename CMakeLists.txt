@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(Donutopia VERSION 0.1.0)
+project(Donutopia VERSION 1.0)
 
 # abilita il supporto per i test, tra cui l'opzione BUILD_TESTING usata sotto
 include(CTest)
@@ -18,7 +18,8 @@ string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-frame-pointer")
 string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-frame-pointer")
 
-add_executable(donutopia source/main.cpp source/matrix.cpp source/point.cpp source/camera.cpp source/solid.cpp source/render.cpp source/rgb.cpp)
+# add_executable(donutopia source/main.cpp source/matrix.cpp source/point.cpp source/camera.cpp source/solid.cpp source/render.cpp source/rgb.cpp)
+add_library(donutopia STATIC source/matrix.cpp source/point.cpp source/camera.cpp source/solid.cpp source/render.cpp source/rgb.cpp)
 
 # se il testing e' abilitato...
 #   per disabilitare il testing, passare -DBUILD_TESTING=OFF a cmake durante la fase di configurazione
