@@ -1,6 +1,7 @@
 #include "point.hpp"
 
 #include <cmath>
+#include <stdexcept>
 
 Point::Point(ftype val) { pt.fill(val); }
 
@@ -22,7 +23,12 @@ ftype Point::normSquared() const {
   return pt[0] * pt[0] + pt[1] * pt[1] + pt[2] * pt[2];
 }
 
-Point Point::unitVector() const { return (*this) / this->norm(); }
+Point Point::unitVector() const {
+  if (this->normSquared() == 0.) {
+    throw std::runtime_error("Called Point::unitVector from a null point.");
+  }
+  return (*this) / this->norm();
+}
 
 Point& Point::operator+=(const Point& P) {
   for (int i = 0; i < 3; i++) {
