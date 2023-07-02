@@ -35,7 +35,7 @@ class Ellipsoid : public Shape {
  public:
   Ellipsoid() = default;
   Ellipsoid(ftype A_, ftype B_, ftype C_, int alpha_, int beta_, RGB _color)
-      : A(A_), B(B_), ALPHA_POINTS(alpha_), BETA_POINTS(beta_), color(_color) {}
+      : A(A_), B(B_), C(C_), ALPHA_POINTS(alpha_), BETA_POINTS(beta_), color(_color) {}
   void shift(Point);
   void set_cdm(Point);
   void rotate(Point);
