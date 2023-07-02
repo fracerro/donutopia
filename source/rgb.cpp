@@ -1,3 +1,3 @@
 #include "rgb.hpp"
 
-RGB::RGB(int _R, int _G, int _B) : R(_R), G(_G), B(_B) {}
+RGB::RGB(uint8_t _R, uint8_t _G, uint8_t _B) : R(_R), G(_G), B(_B) {}

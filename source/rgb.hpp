@@ -1,14 +1,15 @@
 #ifndef RGB_HPP
 #define RGB_HPP
 
-// eventually control that R, G and B must be in range [0, 255]
+#include <cstdint>
+
 struct RGB {
-  int R{};
-  int G{};
-  int B{};
+  uint8_t R{};
+  uint8_t G{};
+  uint8_t B{};
 
   RGB() = default;
-  RGB(int, int, int);
+  RGB(uint8_t, uint8_t, uint8_t);
 };
 
 #endif
