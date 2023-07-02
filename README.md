@@ -15,3 +15,12 @@ cmake -S . -B build -DBUILD_TESTING=ON
 cmake --build build
 
 ```
+
+# Demo
+
+Per compilare i programmi di demo (dopo aver compilato la libreria):
+```
+cd demo
+make
+```
+Nella cartella *builds* verranno generati gli eseguibili.
