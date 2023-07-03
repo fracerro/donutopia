@@ -12,8 +12,11 @@ class Donut : public Shape {
   Donut() = default;
   Donut(ftype, ftype, int, RGB);
 
-  void setR(ftype);
-  void setr(ftype);
+  ftype getR();
+  ftype getr();
+
+  void setR(const ftype);
+  void setr(const ftype);
 
   std::vector<Point> getPoints() const override;
 };
@@ -27,9 +30,13 @@ class Ellipsoid : public Shape {
   Ellipsoid() = default;
   Ellipsoid(ftype, ftype, ftype, int, RGB);
 
-  void setA(ftype);
-  void setB(ftype);
-  void setC(ftype);
+  ftype getA();
+  ftype getB();
+  ftype getC();
+
+  void setA(const ftype);
+  void setB(const ftype);
+  void setC(const ftype);
 
   std::vector<Point> getPoints() const override;
 };
@@ -43,9 +50,13 @@ class Cylinder : public Shape {
   Cylinder() = default;
   Cylinder(ftype, ftype, ftype, int, RGB);
 
-  void setR(ftype);
-  void setr(ftype);
-  void seth(ftype);
+  ftype getR();
+  ftype getr();
+  ftype geth();
+
+  void setR(const ftype);
+  void setr(const ftype);
+  void seth(const ftype);
 
   std::vector<Point> getPoints() const override;
 };
