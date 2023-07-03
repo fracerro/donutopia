@@ -17,13 +17,13 @@ Donut::Donut(ftype R_, ftype r_, int points_, RGB color_) {
   color = color_;
 }
 
-ftype Donut::getR() { return R; }
-ftype Donut::getr() { return r; }
+ftype Donut::getR() const { return R; }
+ftype Donut::getr() const { return r; }
 
 void Donut::setR(const ftype R_) { R = R_; }
 void Donut::setr(const ftype r_) { r = r_; }
 
-std::vector<Point> Donut::getPoints() const {
+std::vector<Point> Donut::computePoints() const {
   std::vector<Point> figure{};
   float Z = sqrt(points);
   for (int i = 0; i < Z; i++) {
@@ -52,15 +52,15 @@ Ellipsoid::Ellipsoid(ftype A_, ftype B_, ftype C_, int points_, RGB color_) {
   color = color_;
 }
 
-ftype Ellipsoid::getA() { return A; }
-ftype Ellipsoid::getB() { return B; }
-ftype Ellipsoid::getC() { return C; }
+ftype Ellipsoid::getA() const { return A; }
+ftype Ellipsoid::getB() const { return B; }
+ftype Ellipsoid::getC() const { return C; }
 
 void Ellipsoid::setA(const ftype A_) { A = A_; }
 void Ellipsoid::setB(const ftype B_) { B = B_; }
 void Ellipsoid::setC(const ftype C_) { C = C_; }
 
-std::vector<Point> Ellipsoid::getPoints() const {
+std::vector<Point> Ellipsoid::computePoints() const {
   std::vector<Point> figure{};
   float Z = sqrt(points);
   for (int i = 0; i < Z; i++) {
@@ -89,15 +89,15 @@ Cylinder::Cylinder(ftype R_, ftype r_, ftype h_, int points_, RGB color_) {
   color = color_;
 }
 
-ftype Cylinder::getR() { return R; }
-ftype Cylinder::getr() { return r; }
-ftype Cylinder::geth() { return h; }
+ftype Cylinder::getR() const { return R; }
+ftype Cylinder::getr() const { return r; }
+ftype Cylinder::geth() const { return h; }
 
 void Cylinder::setR(const ftype R_) { R = R_; };
 void Cylinder::setr(const ftype r_) { r = r_; };
 void Cylinder::seth(const ftype h_) { h = h_; };
 
-std::vector<Point> Cylinder::getPoints() const {
+std::vector<Point> Cylinder::computePoints() const {
   std::vector<Point> figure{};
   for (int i = 0; i < points; i++) {
     float alpha = 2 * M_PI * i / points;

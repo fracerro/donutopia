@@ -65,7 +65,7 @@ std::vector<RGB> render(const Camera& cam,
   std::vector<ftype> distances(cam.getPixelX() * cam.getPixelY(),
                                std::numeric_limits<ftype>::max());
   for (const auto& sprite : obj) {
-    std::vector<Point> points = sprite->getPoints();
+    std::vector<Point> points = sprite->computePoints();
     for (const auto& P : points) {
       //  check if the point is in front of the camera, if not skip iteration
       if (std::signbit(dot(P - cam.getPosition(), cam.getNormalVector()))) {

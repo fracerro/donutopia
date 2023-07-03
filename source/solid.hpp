@@ -12,13 +12,13 @@ class Donut : public Shape {
   Donut() = default;
   Donut(ftype, ftype, int, RGB);
 
-  ftype getR();
-  ftype getr();
+  ftype getR() const;
+  ftype getr() const;
 
   void setR(const ftype);
   void setr(const ftype);
 
-  std::vector<Point> getPoints() const override;
+  std::vector<Point> computePoints() const override;
 };
 
 class Ellipsoid : public Shape {
@@ -30,15 +30,15 @@ class Ellipsoid : public Shape {
   Ellipsoid() = default;
   Ellipsoid(ftype, ftype, ftype, int, RGB);
 
-  ftype getA();
-  ftype getB();
-  ftype getC();
+  ftype getA() const;
+  ftype getB() const;
+  ftype getC() const;
 
   void setA(const ftype);
   void setB(const ftype);
   void setC(const ftype);
 
-  std::vector<Point> getPoints() const override;
+  std::vector<Point> computePoints() const override;
 };
 
 class Cylinder : public Shape {
@@ -50,15 +50,15 @@ class Cylinder : public Shape {
   Cylinder() = default;
   Cylinder(ftype, ftype, ftype, int, RGB);
 
-  ftype getR();
-  ftype getr();
-  ftype geth();
+  ftype getR() const;
+  ftype getr() const;
+  ftype geth() const;
 
   void setR(const ftype);
   void setr(const ftype);
   void seth(const ftype);
 
-  std::vector<Point> getPoints() const override;
+  std::vector<Point> computePoints() const override;
 };
 
 #endif

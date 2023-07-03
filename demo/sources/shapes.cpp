@@ -1,7 +1,6 @@
 #include <SFML/Graphics/Image.hpp>
-
-#include <memory>
 #include <cmath>
+#include <memory>
 
 #include "../../source/donutopia.hpp"
 
@@ -24,7 +23,7 @@ int main() {
   cil->setCenter(Point(0., 30., 50.));
   cil->rotate(Point(0, M_PI_2, M_PI_2));
   sprites.push_back(cil);
-  
+
   auto res = render(cam, sprites, RGB(128, 128, 128));
 
   std::vector<sf::Uint8> pixels;

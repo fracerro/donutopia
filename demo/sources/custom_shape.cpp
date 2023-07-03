@@ -1,7 +1,7 @@
 #include <SFML/Graphics/Image.hpp>
+#include <cmath>
 #include <iostream>
 #include <memory>
-#include <cmath>
 
 #include "../../source/donutopia.hpp"
 
@@ -21,8 +21,8 @@ class Cone : public Shape {
   void setR(ftype R_) { R = R_; }
   void seth(ftype h_) { h = h_; }
 
-  // TODO: fix getPoints()
-  std::vector<Point> getPoints() const override {
+  // TODO: fix computePoints()
+  std::vector<Point> computePoints() const override {
     std::vector<Point> figure{};
     for (int i = 0; i < points; i++) {
       float a = 2 * M_PI * i / points;
@@ -48,7 +48,7 @@ int main() {
              120. / 360. * M_PI * 2);
 
   auto cone = std::make_shared<Cone>(3., 5., 1000, RGB(200, 200, 0));
-  //cone.setOrientation(Point(M_PI_2, M_PI_2 , 0));
+  // cone.setOrientation(Point(M_PI_2, M_PI_2 , 0));
   std::vector<std::shared_ptr<Shape>> sprites{};
   sprites.push_back(cone);
   auto res = render(cam, sprites, RGB(128, 128, 128));
