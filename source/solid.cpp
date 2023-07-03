@@ -23,10 +23,11 @@ void Donut::setr(ftype r_) { r = r_; }
 std::vector<Point> Donut::getPoints() const {
   std::vector<Point> figure{};
   for (int i = 0; i < sqrt(points); i++) {
-    float a = 2 * M_PI * i / sqrt(points);
+    float alpha = 2 * M_PI * i / sqrt(points);
     for (int j = 0; j < sqrt(points); j++) {
-      float b = 2 * M_PI * j / sqrt(points);
-      Point p((R + r * cos(a)) * cos(b), (R + r * cos(a)) * sin(b), r * sin(a));
+      float beta = 2 * M_PI * j / sqrt(points);
+      Point p((R + r * cos(alpha)) * cos(beta),
+              (R + r * cos(alpha)) * sin(beta), r * sin(alpha));
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
@@ -47,13 +48,18 @@ Ellipsoid::Ellipsoid(ftype A_, ftype B_, ftype C_, int points_, RGB color_) {
   color = color_;
 }
 
+void Ellipsoid::setA(ftype A_) { A = A_; }
+void Ellipsoid::setB(ftype B_) { B = B_; }
+void Ellipsoid::setC(ftype C_) { C = C_; }
+
 std::vector<Point> Ellipsoid::getPoints() const {
   std::vector<Point> figure{};
   for (int i = 0; i < sqrt(points); i++) {
-    float a = M_PI * i / sqrt(points);
+    float alpha = M_PI * i / sqrt(points);
     for (int j = 0; j < sqrt(points); j++) {
-      float b = 2 * M_PI * j / sqrt(points);
-      Point p(A * sin(a) * cos(b), B * sin(a) * sin(b), C * cos(a));
+      float beta = 2 * M_PI * j / sqrt(points);
+      Point p(A * sin(alpha) * cos(beta), B * sin(alpha) * sin(beta),
+              C * cos(alpha));
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
@@ -78,17 +84,14 @@ void Cylinder::setR(ftype R_) { R = R_; };
 void Cylinder::setr(ftype r_) { r = r_; };
 void Cylinder::seth(ftype h_) { h = h_; };
 
-// TODO: adjust the total points numeber in order for it to be euqal to "points"
-// variable
 std::vector<Point> Cylinder::getPoints() const {
   std::vector<Point> figure{};
-  float Z = sqrt(points);
-  for (int i = 0; i < Z; i++) {
-    float a = 2 * M_PI * i / Z;
-    for (int j = -Z / 2; j < Z / 2; j++) {
-      float b = h * j / Z;
-      Point p(R * cos(a), R * sin(a), b);
-      Point q(r * cos(a), r * sin(a), b);
+  for (int i = 0; i < points; i++) {
+    float alpha = 2 * M_PI * i / points;
+    for (int j = -points / 2; j < points / 2; j++) {
+      float H = h * j / points;
+      Point p(R * cos(alpha), R * sin(alpha), H);
+      Point q(r * cos(alpha), r * sin(alpha), H);
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
@@ -104,16 +107,17 @@ std::vector<Point> Cylinder::getPoints() const {
       figure.push_back(q);
     }
   }
-
-  for (int k = -Z; k < Z; k++) {
-    for (int l = -Z; l < Z; l++) {
-      ftype distance = sqrt(pow(R * l / Z, 2) + pow(R * k / Z, 2));
+  int facePoints = points / 2;
+  for (int k = -facePoints; k < facePoints; k++) {
+    for (int l = -facePoints; l < facePoints; l++) {
+      ftype distance =
+          sqrt(pow(R * l / facePoints, 2) + pow(R * k / facePoints, 2));
       if (distance > R || distance < r) {
         continue;
       }
 
-      Point p(R * l / Z, R * k / Z, +h / 2);
-      Point q(R * l / Z, R * k / Z, -h / 2);
+      Point p(R * l / facePoints, R * k / facePoints, +h / 2);
+      Point q(R * l / facePoints, R * k / facePoints, -h / 2);
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
