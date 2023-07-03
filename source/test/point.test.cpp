@@ -1,9 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-#include "doctest.h"
 #include "../matrix.hpp"
+#include "doctest.h"
 
-TEST_CASE("Testing the matrix class") {  // manca fromSpherical e rotated_Point
+TEST_CASE("Testing the matrix class") {
   Point a(1.);
   Point b(1., 2., 3.);
   Point c{b};
@@ -65,5 +65,17 @@ TEST_CASE("Testing the matrix class") {  // manca fromSpherical e rotated_Point
     CHECK(c(0) == -1);
     CHECK(c(1) == 2);
     CHECK(c(2) == -1);
+  }
+  SUBCASE("Testing fromSpherical function") {
+    Point P = fromSpherical(2., M_PI_4, 2. * M_PI / 3.);
+    CHECK(P(0) == doctest::Approx(-0.7071067812));
+    CHECK(P(1) == doctest::Approx(1.224744871));
+    CHECK(P(2) == doctest::Approx(1.414213562));
+  }
+  SUBCASE("Testing rotatedPoint function") {
+    Point P = rotatedPoint(Point(1., 2., -3.), M_PI / 6., Point(-1., 2., 2.));
+    CHECK(P(0) == doctest::Approx(-0.7559831));
+    CHECK(P(1) == doctest::Approx(1.4760677));
+    CHECK(P(2) == doctest::Approx(-3.3540593));
   }
 }

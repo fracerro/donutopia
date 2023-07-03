@@ -104,6 +104,7 @@ ftype const& Matrix::operator()(int i, int j) const { return mat[i][j]; }
 ftype& Matrix::operator()(int i, int j) { return mat[i][j]; }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& P) {
+  os << "[";
   for (int i = 0; i < 3; i++) {
     os << "[";
     for (int j = 0; j < 3; j++) {
@@ -112,9 +113,12 @@ std::ostream& operator<<(std::ostream& os, const Matrix& P) {
         os << ", ";
       }
     }
-    os << "]" << '\n';
+    os << "]";
+    if (i != 2) {
+      os << ", ";
+    }
   }
-  os << '\n';
+  os << "]";
   return os;
 }
 

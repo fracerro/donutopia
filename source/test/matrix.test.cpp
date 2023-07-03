@@ -4,7 +4,7 @@
 
 #include "doctest.h"
 
-TEST_CASE("Testing the matrix class") {  // manca rotationMatrix
+TEST_CASE("Testing the matrix class") {
   Matrix A(4.);  // This tests if the ftype filler constructor works
   Matrix A_{A};
 
@@ -75,5 +75,37 @@ TEST_CASE("Testing the matrix class") {  // manca rotationMatrix
     CHECK(A(1, 0) == 8.);
     CHECK(A(2, 0) == 9.);
     CHECK(A(2, 1) == 10.);
+  }
+
+  SUBCASE("Testing rotationMatrix function") {
+    Matrix M = rotationMatrix(M_PI / 6., Point(1., -2., 3.));
+    CHECK(M(0, 0) == doctest::Approx(0.8755950));
+    CHECK(M(0, 1) == doctest::Approx(-0.4200311));
+    CHECK(M(0, 2) == doctest::Approx(-0.2385524));
+    CHECK(M(1, 0) == doctest::Approx(0.3817526));
+    CHECK(M(1, 1) == doctest::Approx(0.9043038));
+    CHECK(M(1, 2) == doctest::Approx(-0.1910483));
+    CHECK(M(2, 0) == doctest::Approx(0.2959701));
+    CHECK(M(2, 1) == doctest::Approx(0.0762129));
+    CHECK(M(2, 2) == doctest::Approx(0.9521520));
+  }
+
+  SUBCASE("Testing * / *= operator between Matrix and Point") {
+    Matrix M{};
+    M(0, 0) = 0.3;
+    M(0, 1) = 0.2;
+    M(0, 2) = -0.1;
+    M(1, 0) = 0.4;
+    M(1, 1) = -0.7;
+    M(1, 2) = 3.3;
+    M(2, 0) = 2.3;
+    M(2, 1) = -0.9;
+    M(2, 2) = 1.1;
+    Point P(4.5, -2.3, 1.9);
+    P = M * P;
+
+    CHECK(P(0) == doctest::Approx(0.7));
+    CHECK(P(1) == doctest::Approx(9.68));
+    CHECK(P(2) == doctest::Approx(14.51));
   }
 }

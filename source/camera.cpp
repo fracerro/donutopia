@@ -3,10 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-const int maxPixel = 4096;
-
 Camera::Camera(const Point& _position, ftype _theta, ftype _phi, ftype _psi,
-
                int _pixelX, int _pixelY, ftype _fov)
     : position(_position),
       phi(_phi),

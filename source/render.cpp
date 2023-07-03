@@ -31,11 +31,12 @@ int projectPoint(const Camera& cam, const Point& P) {
   // default camera orientation
   Point dir_x(sin(cam.getPhi()), -cos(cam.getPhi()), 0.);
   // rotate the camera plane paraller to xy plane
-  Point relativePosition = rotatedPoint(
-      intersection, acos(dot(cam.getNormalVector(), Point(0., 0., 1.))), dir_x);
+  Point relativePosition = rotatedPoint(intersection, cam.getTheta(), dir_x);
 
   // angle between dir_x and the x unit vector
-  ftype angle = acos(dot(dir_x, Point(1., 0., 0.)));
+  // dot(dir_x, Point(1., 0., 0.)) == sin(cam.getPhi()), by the definition of
+  // dir_x
+  ftype angle = acos(sin(cam.getPhi()));
   if (std::signbit(cross(Point(1., 0., 0.), dir_x)(2))) {
     angle = -angle;  // get angle sign
   }

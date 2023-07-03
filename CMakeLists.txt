@@ -33,4 +33,7 @@ if (BUILD_TESTING)
   add_executable(point.test.t  source/test/point.test.cpp source/matrix.cpp source/point.cpp)
   add_test(NAME point.test.t COMMAND point.test.t)
 
+  add_executable(render.test.t source/test/render.test.cpp source/matrix.cpp source/point.cpp source/camera.cpp source/render.cpp source/rgb.cpp source/shape.cpp)
+  add_test(NAME render.test.t COMMAND render.test.t)
+
 endif()

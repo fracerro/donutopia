@@ -137,6 +137,6 @@ Point rotatedPoint(const Point& P, ftype theta, const Point& v) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Point& P) {
-  os << "(" << P(0) << ", " << P(1) << ", " << P(2) << ")";
+  os << "[" << P(0) << ", " << P(1) << ", " << P(2) << "]";
   return os;
 }
