@@ -10,10 +10,14 @@
 steps:
 1) project point onto plane
 2) calculated dir_x: default x-axis for camera
-3) rotate the camera plane to be parallel to the xy plane, with cross(dir_x,
-dir_y) = -k 4) rotate the point to get the default orientation dictated by
-dir_x, and then rotate by the user chosen angle psi 5) scale the point with
-camera Fov 6) calculate x and y 7) check if the point is inside the screen, in
+3) rotate the camera plane to be parallel to the xy plane, with cross
+cross(dir_x, dir_y) = -k
+4) rotate the point to get the default orientation dictated by
+dir_x, and then rotate by the user chosen angle psi
+5) scale the point with
+camera Fov
+6) calculate x and y
+7) check if the point is inside the screen, in
 this case return the array position, otherwise -1
 
 */
@@ -54,14 +58,15 @@ int projectPoint(const Camera& cam, const Point& P) {
   }
 }
 
-std::vector<RGB> render(const Camera& cam, const std::vector<Shape*>& obj,
+std::vector<RGB> render(const Camera& cam,
+                        const std::vector<std::shared_ptr<Shape>>& obj,
                         RGB backgroundColor) {
   std::vector<RGB> image(cam.getPixelX() * cam.getPixelY(), backgroundColor);
   std::vector<ftype> distances(cam.getPixelX() * cam.getPixelY(),
                                std::numeric_limits<ftype>::max());
-  for (const Shape* sprite : obj) {
+  for (const auto& sprite : obj) {
     std::vector<Point> points = sprite->getPoints();
-    for (const Point& P : points) {
+    for (const auto& P : points) {
       //  check if the point is in front of the camera, if not skip iteration
       if (std::signbit(dot(P - cam.getPosition(), cam.getNormalVector()))) {
         continue;

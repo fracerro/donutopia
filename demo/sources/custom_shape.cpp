@@ -1,6 +1,7 @@
 #include <SFML/Graphics/Image.hpp>
-#include <cmath>
 #include <iostream>
+#include <memory>
+#include <cmath>
 
 #include "../../source/donutopia.hpp"
 
@@ -46,10 +47,10 @@ int main() {
   Camera cam(Point(10., 0., 4.), M_PI_2, -M_PI, 0., 1920, 1080,
              120. / 360. * M_PI * 2);
 
-  Cone cone(3., 5., 1000, RGB(200, 200, 0));
+  auto cone = std::make_shared<Cone>(3., 5., 1000, RGB(200, 200, 0));
   //cone.setOrientation(Point(M_PI_2, M_PI_2 , 0));
-  std::vector<Shape*> sprites{};
-  sprites.push_back(&cone);
+  std::vector<std::shared_ptr<Shape>> sprites{};
+  sprites.push_back(cone);
   auto res = render(cam, sprites, RGB(128, 128, 128));
 
   std::vector<sf::Uint8> pixels;
