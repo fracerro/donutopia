@@ -4,10 +4,10 @@
 #include "doctest.h"
 
 TEST_CASE("Testing the matrix class") {
-  Point a(1.);
-  Point b(1., 2., 3.);
-  Point c{b};
-  ftype lambda = 2;
+  dt::Point a(1.);
+  dt::Point b(1., 2., 3.);
+  dt::Point c{b};
+  dt::ftype lambda = 2;
 
   CHECK((c == b) == true);
   CHECK((c == a) == false);
@@ -67,13 +67,13 @@ TEST_CASE("Testing the matrix class") {
     CHECK(c(2) == -1);
   }
   SUBCASE("Testing fromSpherical function") {
-    Point P = fromSpherical(2., M_PI_4, 2. * M_PI / 3.);
+    dt::Point P = dt::fromSpherical(2., M_PI_4, 2. * M_PI / 3.);
     CHECK(P(0) == doctest::Approx(-0.7071067812));
     CHECK(P(1) == doctest::Approx(1.224744871));
     CHECK(P(2) == doctest::Approx(1.414213562));
   }
   SUBCASE("Testing rotatedPoint function") {
-    Point P = rotatedPoint(Point(1., 2., -3.), M_PI / 6., Point(-1., 2., 2.));
+    dt::Point P = dt::rotatedPoint(dt::Point(1., 2., -3.), M_PI / 6., dt::Point(-1., 2., 2.));
     CHECK(P(0) == doctest::Approx(-0.7559831));
     CHECK(P(1) == doctest::Approx(1.4760677));
     CHECK(P(2) == doctest::Approx(-3.3540593));

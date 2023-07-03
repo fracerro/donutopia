@@ -5,35 +5,35 @@
 
 #include "../../source/donutopia.hpp"
 
-class Cone : public Shape {
-  ftype R{};
-  ftype h{};
+class Cone : public dt::Shape {
+  dt::ftype R{};
+  dt::ftype h{};
 
  public:
   Cone() = default;
-  Cone(ftype R_, ftype h_, int points_, RGB color_) {
+  Cone(dt::ftype R_, dt::ftype h_, int points_, dt::RGB color_) {
     R = R_;
     h = h_;
     points = points_;
     color = color_;
   }
 
-  void setR(ftype R_) { R = R_; }
-  void seth(ftype h_) { h = h_; }
+  void setR(dt::ftype R_) { R = R_; }
+  void seth(dt::ftype h_) { h = h_; }
 
   // TODO: fix computePoints()
-  std::vector<Point> computePoints() const override {
-    std::vector<Point> figure{};
+  std::vector<dt::Point> computePoints() const override {
+    std::vector<dt::Point> figure{};
     for (int i = 0; i < points; i++) {
       float a = 2 * M_PI * i / points;
       for (int j = -points / 2; j < points / 2; j++) {
         float b = h * j / points;
-        ftype r = R * (j - (points / 2)) / points;
-        Point p(r * cos(a), r * sin(a), b);
+        dt::ftype r = R * (j - (points / 2)) / points;
+        dt::Point p(r * cos(a), r * sin(a), b);
 
-        p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
-        p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
-        p = rotatedPoint(p, orientation(2), Point(0., 0., 1.));
+        p = rotatedPoint(p, orientation(0), dt::Point(1., 0., 0.));
+        p = rotatedPoint(p, orientation(1), dt::Point(0., 1., 0.));
+        p = rotatedPoint(p, orientation(2), dt::Point(0., 0., 1.));
 
         p += center;
         figure.push_back(p);
@@ -44,14 +44,14 @@ class Cone : public Shape {
 };
 
 int main() {
-  Camera cam(Point(10., 0., 4.), M_PI_2, -M_PI, 0., 1920, 1080,
+  dt::Camera cam(dt::Point(10., 0., 4.), M_PI_2, -M_PI, 0., 1920, 1080,
              120. / 360. * M_PI * 2);
 
-  auto cone = std::make_shared<Cone>(3., 5., 1000, RGB(200, 200, 0));
+  auto cone = std::make_shared<Cone>(3., 5., 1000, dt::RGB(200, 200, 0));
   // cone.setOrientation(Point(M_PI_2, M_PI_2 , 0));
-  std::vector<std::shared_ptr<Shape>> sprites{};
+  std::vector<std::shared_ptr<dt::Shape>> sprites{};
   sprites.push_back(cone);
-  auto res = render(cam, sprites, RGB(128, 128, 128));
+  auto res = render(cam, sprites, dt::RGB(128, 128, 128));
 
   std::vector<sf::Uint8> pixels;
   for (int i = 0; i < 1920 * 1080; i++) {
