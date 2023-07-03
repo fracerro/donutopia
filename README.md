@@ -1,15 +1,15 @@
 # Donutopia
-Progetto per il corso "Programmazione per la Fisica", anno accademico 2022/2023.
 
-# Compilazione
+# Compilation
 
-Con i test:
+Compile *only the library*:
 ```
 cmake -S . -B build -DBUILD_TESTING=ON
 cmake --build build
 ```
 
-Solo la libreria:
+Compile with testcases:
+
 ```
 cmake -S . -B build -DBUILD_TESTING=ON
 cmake --build build
@@ -18,9 +18,9 @@ cmake --build build
 
 # Demo
 
-Per compilare i programmi di demo (dopo aver compilato la libreria):
+To compile demo programs (**after** compiling the library):
 ```
 cd demo
 make
 ```
-Nella cartella *builds* verranno generati gli eseguibili.
+Executables can be found in the folder demo/builds.
