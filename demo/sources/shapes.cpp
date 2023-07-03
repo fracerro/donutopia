@@ -7,8 +7,8 @@ int main() {
   Camera cam(Point(-25., -25., 0.), M_PI_4, M_PI_4, 0., 1920, 1080,
              120. / 360. * M_PI * 2);
 
-  Cylinder cil1(15., 10., 12., 300, 300, RGB(155, 155, 155));
-  cil1.set_cdm(Point(0., 30., 50.));
+  Cylinder cil1(15., 10., 12., 10000, RGB(200, 0, 0));
+  cil1.setCenter(Point(0., 30., 50.));
   cil1.rotate(Point(0, M_PI_2, M_PI_2));
   std::vector<Shape*> sprites{};
   sprites.push_back(&cil1);

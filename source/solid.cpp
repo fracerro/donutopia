@@ -5,73 +5,88 @@
 #include "config.hpp"
 #include "matrix.hpp"
 #include "shape.hpp"
+#include "solid.hpp"
 
-void Donut::shift(Point P) { CDM += P; }
+// using the contructor ": var(var_value) ..." generates an error (color not
+// defined), no idea why
+// maybe try later with Shape::variable_name
+Donut::Donut(ftype R_, ftype r_, int points_, RGB color_) {
+  R = R_;
+  r = r_;
+  points = points_;
+  color = color_;
+}
 
-void Donut::set_cdm(Point P) { CDM = P; }
-
-void Donut::rotate(Point P) { orientation += P; }
+void Donut::setR(ftype R_) { R = R_; }
+void Donut::setr(ftype r_) { r = r_; }
 
 std::vector<Point> Donut::getPoints() const {
-  std::vector<Point> points{};
-  for (int i = 0; i < ALPHA_POINTS; i++) {
-    float a = 2 * M_PI * i / ALPHA_POINTS;
-    for (int j = 0; j < BETA_POINTS; j++) {
-      float b = 2 * M_PI * j / BETA_POINTS;
+  std::vector<Point> figure{};
+  for (int i = 0; i < sqrt(points); i++) {
+    float a = 2 * M_PI * i / sqrt(points);
+    for (int j = 0; j < sqrt(points); j++) {
+      float b = 2 * M_PI * j / sqrt(points);
       Point p((R + r * cos(a)) * cos(b), (R + r * cos(a)) * sin(b), r * sin(a));
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
       p = rotatedPoint(p, orientation(2), Point(0., 0., 1.));
 
-      p += CDM;
-      points.push_back(p);
+      p += center;
+      figure.push_back(p);
     }
   }
-  return points;
+  return figure;
 }
 
-RGB Donut::getColor() const { return color; }
-
-void Ellipsoid::shift(Point P) { CDM += P; }
-
-void Ellipsoid::set_cdm(Point P) { CDM = P; }
-
-void Ellipsoid::rotate(Point P) { orientation += P; }
+Ellipsoid::Ellipsoid(ftype A_, ftype B_, ftype C_, int points_, RGB color_) {
+  A = A_;
+  B = B_;
+  C = C_;
+  points = points_;
+  color = color_;
+}
 
 std::vector<Point> Ellipsoid::getPoints() const {
-  std::vector<Point> points{};
-  for (int i = 0; i < ALPHA_POINTS; i++) {
-    float a = M_PI * i / ALPHA_POINTS;
-    for (int j = 0; j < BETA_POINTS; j++) {
-      float b = 2 * M_PI * j / BETA_POINTS;
+  std::vector<Point> figure{};
+  for (int i = 0; i < sqrt(points); i++) {
+    float a = M_PI * i / sqrt(points);
+    for (int j = 0; j < sqrt(points); j++) {
+      float b = 2 * M_PI * j / sqrt(points);
       Point p(A * sin(a) * cos(b), B * sin(a) * sin(b), C * cos(a));
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
       p = rotatedPoint(p, orientation(2), Point(0., 0., 1.));
 
-      p += CDM;
-      points.push_back(p);
+      p += center;
+      figure.push_back(p);
     }
   }
-  return points;
+  return figure;
 }
-RGB Ellipsoid::getColor() const { return color; }
 
-void Cylinder::shift(Point P) { CDM += P; }
+Cylinder::Cylinder(ftype R_, ftype r_, ftype h_, int points_, RGB color_) {
+  R = R_;
+  r = r_;
+  h = h_;
+  points = points_;
+  color = color_;
+}
 
-void Cylinder::set_cdm(Point P) { CDM = P; }
+void Cylinder::setR(ftype R_) { R = R_; };
+void Cylinder::setr(ftype r_) { r = r_; };
+void Cylinder::seth(ftype h_) { h = h_; };
 
-void Cylinder::rotate(Point P) { orientation += P; }
-
+// TODO: adjust the total points numeber in order for it to be euqal to "points"
+// variable
 std::vector<Point> Cylinder::getPoints() const {
-  std::vector<Point> points{};
-
-  for (int i = 0; i < ALPHA_POINTS; i++) {
-    float a = 2 * M_PI * i / ALPHA_POINTS;
-    for (int j = -BETA_POINTS / 2; j < BETA_POINTS / 2; j++) {
-      float b = h * j / BETA_POINTS;
+  std::vector<Point> figure{};
+  float Z = sqrt(points);
+  for (int i = 0; i < Z; i++) {
+    float a = 2 * M_PI * i / Z;
+    for (int j = -Z / 2; j < Z / 2; j++) {
+      float b = h * j / Z;
       Point p(R * cos(a), R * sin(a), b);
       Point q(r * cos(a), r * sin(a), b);
 
@@ -83,23 +98,22 @@ std::vector<Point> Cylinder::getPoints() const {
       q = rotatedPoint(q, orientation(1), Point(0., 1., 0.));
       q = rotatedPoint(q, orientation(2), Point(0., 0., 1.));
 
-      p += CDM;
-      q += CDM;
-      points.push_back(p);
-      points.push_back(q);
+      p += center;
+      q += center;
+      figure.push_back(p);
+      figure.push_back(q);
     }
   }
-  ftype GAMMA_POINTS = sqrt(ALPHA_POINTS * BETA_POINTS);
-  for (int k = -GAMMA_POINTS; k < GAMMA_POINTS; k++) {
-    for (int l = -GAMMA_POINTS; l < GAMMA_POINTS; l++) {
-      ftype distance =
-          sqrt(pow(R * l / GAMMA_POINTS, 2) + pow(R * k / GAMMA_POINTS, 2));
+
+  for (int k = -Z; k < Z; k++) {
+    for (int l = -Z; l < Z; l++) {
+      ftype distance = sqrt(pow(R * l / Z, 2) + pow(R * k / Z, 2));
       if (distance > R || distance < r) {
         continue;
       }
 
-      Point p(R * l / GAMMA_POINTS, R * k / GAMMA_POINTS, +h / 2);
-      Point q(R * l / GAMMA_POINTS, R * k / GAMMA_POINTS, -h / 2);
+      Point p(R * l / Z, R * k / Z, +h / 2);
+      Point q(R * l / Z, R * k / Z, -h / 2);
 
       p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
       p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
@@ -109,12 +123,11 @@ std::vector<Point> Cylinder::getPoints() const {
       q = rotatedPoint(q, orientation(1), Point(0., 1., 0.));
       q = rotatedPoint(q, orientation(2), Point(0., 0., 1.));
 
-      p += CDM;
-      q += CDM;
-      points.push_back(p);
-      points.push_back(q);
+      p += center;
+      q += center;
+      figure.push_back(p);
+      figure.push_back(q);
     }
   }
-  return points;
+  return figure;
 }
-RGB Cylinder::getColor() const { return color; }

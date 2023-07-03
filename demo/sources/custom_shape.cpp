@@ -1,32 +1,33 @@
 #include <SFML/Graphics/Image.hpp>
 #include <cmath>
+#include <iostream>
 
 #include "../../source/donutopia.hpp"
 
 class Cone : public Shape {
   ftype R{};
   ftype h{};
-  Point CDM{};  // center of the base
-  Point orientation{};
-  int ALPHA_POINTS{};
-  int BETA_POINTS{};
-  RGB color{};
 
  public:
   Cone() = default;
-  Cone(ftype R_, ftype h_, int alpha_, int beta_, RGB color_)
-      : R(R_), h(h_), ALPHA_POINTS(alpha_), BETA_POINTS(beta_), color(color_) {}
+  Cone(ftype R_, ftype h_, int points_, RGB color_) {
+    R = R_;
+    h = h_;
+    points = points_;
+    color = color_;
+  }
 
-  void shift(Point P) { CDM += P; }
-  void set_cdm(Point P) { CDM = P; }
-  void rotate(Point P) { orientation += P; }
+  void setR(ftype R_) { R = R_; }
+  void seth(ftype h_) { h = h_; }
+
   // TODO: fix getPoints()
   std::vector<Point> getPoints() const override {
-    std::vector<Point> points{};
-    for (int i = 0; i < ALPHA_POINTS; i++) {
-      ftype z = h * i / ALPHA_POINTS;
-      for (int j = 0; j < BETA_POINTS; j++) {
-        ftype theta = M_PI * 2 * j / BETA_POINTS;
+    std::vector<Point> figure{};
+    ftype Z = sqrt(points);
+    for (int i = 0; i < Z; i++) {
+      ftype z = h * i / Z;
+      for (int j = 0; j < Z; j++) {
+        ftype theta = M_PI * 2 * j / Z;
         ftype r = (1. - z / h) * R;
         Point p = (r * cos(theta), r * sin(theta), z);
 
@@ -34,20 +35,20 @@ class Cone : public Shape {
         p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
         p = rotatedPoint(p, orientation(2), Point(0., 0., 1.));
 
-        p += CDM;
-        points.push_back(p);
+        p += center;
+        figure.push_back(p);
       }
     }
-    return points;
+    std::cout << figure.size() << std::endl;
+    return figure;
   }
-  RGB getColor() const override { return color; }
 };
 
 int main() {
-  Camera cam(Point(-25., -25., 0.), M_PI_4, M_PI_4, 0., 1920, 1080,
+  Camera cam(Point(10., 0., 0.), M_PI_2, -M_PI, 0., 1920, 1080,
              120. / 360. * M_PI * 2);
 
-  Cone cone(5., 15., 1000, 1000, RGB(255, 0, 0));
+  Cone cone(5., 8., 1000000, RGB(255, 0, 0));
   std::vector<Shape*> sprites{};
   sprites.push_back(&cone);
   auto res = render(cam, sprites, RGB(128, 128, 128));

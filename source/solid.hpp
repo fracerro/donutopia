@@ -4,73 +4,50 @@
 #include "shape.hpp"
 
 class Donut : public Shape {
+  // r secondario, R principale
   ftype R{};
-  ftype r{};  // r secondario, R principale
-  int ALPHA_POINTS{};
-  int BETA_POINTS{};
-  Point CDM{}, orientation{};
-  RGB color;
+  ftype r{};
 
  public:
   Donut() = default;
-  Donut(ftype R_, ftype r_, int alpha_, int beta_, RGB _color)
-      : R(R_), r(r_), ALPHA_POINTS(alpha_), BETA_POINTS(beta_), color(_color) {}
+  Donut(ftype, ftype, int, RGB);
 
-  void shift(Point);
-  void set_cdm(Point);
-  void rotate(Point);
+  void setR(ftype);
+  void setr(ftype);
+
   std::vector<Point> getPoints() const override;
-  RGB getColor() const override;
 };
 
 class Ellipsoid : public Shape {
-  ftype A{};  // primo semiasse
-  ftype B{};  // secondo semiasse
-  ftype C{};  // terzo semiasse
-  int ALPHA_POINTS{};
-  int BETA_POINTS{};
-  Point CDM{}, orientation{};
-  RGB color;
+  ftype A{};  // x semi-axis
+  ftype B{};  // y semi-axis
+  ftype C{};  // z semi-exis
 
  public:
   Ellipsoid() = default;
-  Ellipsoid(ftype A_, ftype B_, ftype C_, int alpha_, int beta_, RGB _color)
-      : A(A_),
-        B(B_),
-        C(C_),
-        ALPHA_POINTS(alpha_),
-        BETA_POINTS(beta_),
-        color(_color) {}
-  void shift(Point);
-  void set_cdm(Point);
-  void rotate(Point);
+  Ellipsoid(ftype, ftype, ftype, int, RGB);
+
+  void setA(ftype);
+  void setB(ftype);
+  void setC(ftype);
+
   std::vector<Point> getPoints() const override;
-  RGB getColor() const override;
 };
 
 class Cylinder : public Shape {
   ftype R{};
   ftype r{};
   ftype h{};
-  int ALPHA_POINTS{};
-  int BETA_POINTS{};
-  Point CDM{}, orientation{};
-  RGB color;
 
  public:
   Cylinder() = default;
-  Cylinder(ftype R_, ftype r_, ftype h_, int alpha_, int beta_, RGB _color)
-      : R(R_),
-        r(r_),
-        h(h_),
-        ALPHA_POINTS(alpha_),
-        BETA_POINTS(beta_),
-        color(_color) {}
-  void shift(Point);
-  void set_cdm(Point);
-  void rotate(Point);
+  Cylinder(ftype, ftype, ftype, int, RGB);
+
+  void setR(ftype);
+  void setr(ftype);
+  void seth(ftype);
+
   std::vector<Point> getPoints() const override;
-  RGB getColor() const override;
 };
 
 #endif

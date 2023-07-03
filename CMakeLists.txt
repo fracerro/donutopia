@@ -19,7 +19,7 @@ string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-fra
 string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-frame-pointer")
 
 # add_executable(donutopia source/main.cpp source/matrix.cpp source/point.cpp source/camera.cpp source/solid.cpp source/render.cpp source/rgb.cpp)
-add_library(donutopia STATIC source/matrix.cpp source/point.cpp source/camera.cpp source/solid.cpp source/render.cpp source/rgb.cpp)
+add_library(donutopia STATIC source/matrix.cpp source/point.cpp source/camera.cpp source/solid.cpp source/render.cpp source/rgb.cpp source/shape.cpp)
 
 # se il testing e' abilitato...
 #   per disabilitare il testing, passare -DBUILD_TESTING=OFF a cmake durante la fase di configurazione
@@ -34,4 +34,3 @@ if (BUILD_TESTING)
   add_test(NAME point.test.t COMMAND point.test.t)
 
 endif()
-
