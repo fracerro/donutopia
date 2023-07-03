@@ -23,13 +23,12 @@ class Cone : public Shape {
   // TODO: fix getPoints()
   std::vector<Point> getPoints() const override {
     std::vector<Point> figure{};
-    ftype Z = sqrt(points);
-    for (int i = 0; i < Z; i++) {
-      ftype z = h * i / Z;
-      for (int j = 0; j < Z; j++) {
-        ftype theta = M_PI * 2 * j / Z;
-        ftype r = (1. - z / h) * R;
-        Point p = (r * cos(theta), r * sin(theta), z);
+    for (int i = 0; i < points; i++) {
+      float a = 2 * M_PI * i / points;
+      for (int j = -points / 2; j < points / 2; j++) {
+        float b = h * j / points;
+        ftype r = R * (j - (points / 2)) / points;
+        Point p(r * cos(a), r * sin(a), b);
 
         p = rotatedPoint(p, orientation(0), Point(1., 0., 0.));
         p = rotatedPoint(p, orientation(1), Point(0., 1., 0.));
@@ -39,16 +38,16 @@ class Cone : public Shape {
         figure.push_back(p);
       }
     }
-    std::cout << figure.size() << std::endl;
     return figure;
   }
 };
 
 int main() {
-  Camera cam(Point(10., 0., 0.), M_PI_2, -M_PI, 0., 1920, 1080,
+  Camera cam(Point(10., 0., 4.), M_PI_2, -M_PI, 0., 1920, 1080,
              120. / 360. * M_PI * 2);
 
-  Cone cone(5., 8., 1000000, RGB(255, 0, 0));
+  Cone cone(3., 5., 1000, RGB(200, 200, 0));
+  //cone.setOrientation(Point(M_PI_2, M_PI_2 , 0));
   std::vector<Shape*> sprites{};
   sprites.push_back(&cone);
   auto res = render(cam, sprites, RGB(128, 128, 128));
