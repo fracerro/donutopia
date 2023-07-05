@@ -16,6 +16,10 @@ namespace dt {
     r = r_;
     points = points_;
     color = color_;
+    
+    if (R < r) {
+      throw std::runtime_error("Greater radius must be equal or bigger than minor radius");
+    }
   }
 
   ftype Donut::getR() const { return R; }
@@ -88,6 +92,10 @@ namespace dt {
     h = h_;
     points = points_;
     color = color_;
+
+    if (R < r) {
+      throw std::runtime_error("Greater radius must be equal or bigger than minor radius");
+    }
   }
 
   ftype Cylinder::getR() const { return R; }
@@ -100,7 +108,7 @@ namespace dt {
 
   std::vector<Point> Cylinder::computePoints() const {
     std::vector<Point> figure{};
-    for (int i = 0; i < points; i++) {
+    for (int i = 0; i < points; i++) { //lateral external and internal faces creation cycle
       float alpha = 2 * M_PI * i / points;
       for (int j = -points / 2; j < points / 2; j++) {
         float H = h * j / points;
@@ -121,13 +129,14 @@ namespace dt {
         figure.push_back(q);
       }
     }
+
     int facePoints = points / 2;
-    for (int k = -facePoints; k < facePoints; k++) {
+    for (int k = -facePoints; k < facePoints; k++) { //upper and lower faces creation cycle
       for (int l = -facePoints; l < facePoints; l++) {
         ftype distance =
             sqrt(pow(R * l / facePoints, 2) + pow(R * k / facePoints, 2));
         if (distance > R || distance < r) {
-          continue;
+          continue; //in this condition we are checking that the point is included between R and r, If not we discard it
         }
 
         Point p(R * l / facePoints, R * k / facePoints, +h / 2);

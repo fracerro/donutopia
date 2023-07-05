@@ -12,8 +12,8 @@ class Cone : public dt::Shape {
  public:
   Cone() = default;
   Cone(dt::ftype R_, dt::ftype h_, int points_, dt::RGB color_) {
-    R = R_;
-    h = h_;
+    R = R_; //base radius
+    h = h_; //height
     points = points_;
     color = color_;
   }
@@ -21,7 +21,6 @@ class Cone : public dt::Shape {
   void setR(dt::ftype R_) { R = R_; }
   void seth(dt::ftype h_) { h = h_; }
 
-  // TODO: fix computePoints()
   std::vector<dt::Point> computePoints() const override {
     std::vector<dt::Point> figure{};
     for (int i = 0; i < points; i++) {
