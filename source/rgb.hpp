@@ -4,12 +4,12 @@
 
 namespace dt {
 struct RGB {
-  std::int8_t R{};
-  std::int8_t G{};
-  std::int8_t B{};
+  std::uint8_t R{};
+  std::uint8_t G{};
+  std::uint8_t B{};
 
   RGB() = default;
-  RGB(std::int8_t, std::int8_t, std::int8_t);
+  RGB(std::uint8_t, std::uint8_t, std::uint8_t);
 };
 }  // namespace dt
 
