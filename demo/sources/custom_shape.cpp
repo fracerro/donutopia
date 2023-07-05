@@ -12,8 +12,8 @@ class Cone : public dt::Shape {
  public:
   Cone() = default;
   Cone(dt::ftype R_, dt::ftype h_, int points_, dt::RGB color_) {
-    R = R_; //base radius
-    h = h_; //height
+    R = R_;  // base radius
+    h = h_;  // height
     points = points_;
     color = color_;
   }
@@ -48,7 +48,7 @@ class Cone : public dt::Shape {
 
 int main() {
   dt::Camera cam(dt::Point(20., 0., 0.), M_PI_2, -M_PI, 0., 1920, 1080,
-             60. / 360. * M_PI * 2);
+                 60. / 360. * M_PI * 2);
 
   auto cone = std::make_shared<Cone>(3., 5., 100000, dt::RGB(200, 200, 0));
   cone->setCenter(dt::Point(0., 0., -0.5));

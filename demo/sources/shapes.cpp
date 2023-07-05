@@ -19,7 +19,7 @@ int main() {
   ell->setCenter(dt::Point(0., 0., 60.));
   sprites.push_back(ell);
 
-  auto cil = std::make_shared<dt::Cylinder>(15., 10., 12., 200, dt::RGB(200, 0, 0));
+  auto cil = std::make_shared<dt::Cylinder>(15., 10., 12., 100000, dt::RGB(200, 0, 0));
   cil->setCenter(dt::Point(0., 30., 50.));
   cil->rotate(dt::Point(0, M_PI_2, M_PI_2));
   sprites.push_back(cil);

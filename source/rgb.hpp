@@ -1,15 +1,16 @@
 #ifndef RGB_HPP
 #define RGB_HPP
+#include <cstdint>
 
 namespace dt {
-  struct RGB {
-    int R{};
-    int G{};
-    int B{};
+struct RGB {
+  std::int8_t R{};
+  std::int8_t G{};
+  std::int8_t B{};
 
-    RGB() = default;
-    RGB(int, int, int);
-  };
-}
+  RGB() = default;
+  RGB(std::int8_t, std::int8_t, std::int8_t);
+};
+}  // namespace dt
 
 #endif
