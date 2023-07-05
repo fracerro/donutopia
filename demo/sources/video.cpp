@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <cmath>
 
+
 /*
   WARNING: ffmpeg needs to be installed
 */
@@ -31,13 +32,16 @@ int main() {
   //std::filesystem::create_directory(framesFolder); does not work "filesystem must be a known class"
 
   dt::Camera cam(dt::Point(0., 0., 40.), M_PI, 0., 0., 1920, 1080, M_PI / 3.);
-  auto don = std::make_shared<dt::Donut>(7., 2., 100000, dt::RGB(250, 128, 114));
   int framesNumber = 100;
+  int fps = 20;
+
+  auto don = std::make_shared<dt::Donut>(7., 2., 100000, dt::RGB(250, 128, 114));
+  
   for (int i = 0; i < framesNumber; i++) {
     generateFrame(cam, don, i);
     don->rotate(dt::Point(-0.02, 0.1, -0.07));
     don->shift(dt::Point(cos(2 * M_PI * i / framesNumber),sin(2 * M_PI * i / framesNumber),-0.3));
   }
 
-  std::system(("ffmpeg -i " + framesFolder + "/frame_%d.png -r 20 spinning_donut.mp4").data());
+  std::system(("ffmpeg -i " + framesFolder + "/frame_%d.png -r "+std::to_string(fps)+" spinning_donut.mp4").data());
 }
