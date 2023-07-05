@@ -12,8 +12,8 @@ class Cone : public dt::Shape {
  public:
   Cone() = default;
   Cone(dt::ftype R_, dt::ftype h_, int points_, dt::RGB color_) {
-    R = R_;
-    h = h_;
+    R = R_; //base radius
+    h = h_; //height
     points = points_;
     color = color_;
   }

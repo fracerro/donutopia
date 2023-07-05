@@ -5,9 +5,8 @@
 
 namespace dt {
   class Donut : public Shape {
-    // r secondario, R principale
-    ftype R{};
-    ftype r{};
+    ftype R{}; //main radius (distance from shape center)
+    ftype r{}; //internal thickness radius
 
   public:
     Donut() = default;
@@ -43,9 +42,9 @@ namespace dt {
   };
 
   class Cylinder : public Shape {
-    ftype R{};
-    ftype r{};
-    ftype h{};
+    ftype R{}; //greater radius
+    ftype r{}; //minor radius
+    ftype h{}; //height
 
   public:
     Cylinder() = default;
