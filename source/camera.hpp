@@ -17,8 +17,6 @@ namespace dt {
     int pixelY{};
     ftype fov{};  // filed of view over X axis
 
-    Point normalVector;
-
   public:
     Camera() = default;
     Camera(const Point&, ftype, ftype, ftype, int, int, ftype);
@@ -29,7 +27,6 @@ namespace dt {
     ftype getPsi() const;
     ftype getPhi() const;
     ftype getTheta() const;
-    Point getNormalVector() const;
     Point getPosition() const;
 
     void setPixelX(const int);
@@ -39,6 +36,8 @@ namespace dt {
     void setTheta(const ftype);
     void setPhi(const ftype);
     void setPosition(const Point&);
+
+    Point getNormalVector() const;
   };
 }
 

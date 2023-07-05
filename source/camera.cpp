@@ -22,8 +22,6 @@ namespace dt {
     if (pixelX >= maxPixel || pixelY >= maxPixel) {
       throw std::runtime_error(error_msg.c_str());
     }
-
-    normalVector = fromSpherical(1., theta, phi);
   }
 
   int Camera::getPixelX() const { return pixelX; }
@@ -32,7 +30,7 @@ namespace dt {
   ftype Camera::getPsi() const { return psi; }
   ftype Camera::getTheta() const { return theta; }
   ftype Camera::getPhi() const { return phi; }
-  Point Camera::getNormalVector() const { return normalVector; }
+  Point Camera::getNormalVector() const { return fromSpherical(1., theta, phi); }
   Point Camera::getPosition() const { return position; }
 
   void Camera::setPixelX(const int pixelX_) { pixelX = pixelX_; }
