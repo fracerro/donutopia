@@ -21,13 +21,17 @@ class Cone : public dt::Shape {
   void setR(dt::ftype R_) { R = R_; }
   void seth(dt::ftype h_) { h = h_; }
 
+  dt::ftype getR() { return R; }
+  dt::ftype geth() { return h; }
+
   std::vector<dt::Point> computePoints() const override {
     std::vector<dt::Point> figure{};
-    for (int i = 0; i < points; i++) {
-      float a = 2 * M_PI * i / points;
-      for (int j = -points / 2; j < points / 2; j++) {
-        float b = h * j / points;
-        dt::ftype r = R * (j - (points / 2)) / points;
+    float Z = sqrt(points);
+    for (int i = 0; i < Z; i++) {
+      float a = 2 * M_PI * i / Z;
+      for (int j = -Z / 2; j < Z / 2; j++) {
+        float b = h * j / Z;
+        dt::ftype r = R * (j - (Z / 2)) / Z;
         dt::Point p(r * cos(a), r * sin(a), b);
 
         p = rotatedPoint(p, orientation(0), dt::Point(1., 0., 0.));
@@ -43,11 +47,11 @@ class Cone : public dt::Shape {
 };
 
 int main() {
-  dt::Camera cam(dt::Point(10., 0., 4.), M_PI_2, -M_PI, 0., 1920, 1080,
-             120. / 360. * M_PI * 2);
+  dt::Camera cam(dt::Point(20., 0., 0.), M_PI_2, -M_PI, 0., 1920, 1080,
+             60. / 360. * M_PI * 2);
 
-  auto cone = std::make_shared<Cone>(3., 5., 1000, dt::RGB(200, 200, 0));
-  // cone.setOrientation(Point(M_PI_2, M_PI_2 , 0));
+  auto cone = std::make_shared<Cone>(3., 5., 100000, dt::RGB(200, 200, 0));
+  cone->setCenter(dt::Point(0., 0., -0.5));
   std::vector<std::shared_ptr<dt::Shape>> sprites{};
   sprites.push_back(cone);
   auto res = render(cam, sprites, dt::RGB(128, 128, 128));
