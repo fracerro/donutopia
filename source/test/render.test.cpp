@@ -17,6 +17,8 @@ TEST_CASE("Testing projectPoint function") {
     dt::Point P(5., -3., 1.);
     // calculations done by hand (real pain)
     CHECK(dt::projectPoint(cam, P) == 1510 + 868 * 1920);
+    cam.setPsi(M_PI / 8.);
+    CHECK(dt::projectPoint(cam, P) == 1343 + 1053 * 1920);
   }
 }
 
