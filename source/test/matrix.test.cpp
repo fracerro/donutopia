@@ -1,7 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-#include "../matrix.hpp"
-
+#include "../donutopia.hpp"
 #include "doctest.h"
 
 TEST_CASE("Testing the matrix class") {
@@ -20,7 +19,7 @@ TEST_CASE("Testing the matrix class") {
 
   dt::Matrix C{};
 
-  SUBCASE("Testing + / += operator") {
+  SUBCASE("Testing + and += operator") {
     C = A + B;
     A += B;
     for (int i = 0; i < 3; i++) {
@@ -31,7 +30,7 @@ TEST_CASE("Testing the matrix class") {
     }
   }
 
-  SUBCASE("Testing - / -= operator") {
+  SUBCASE("Testing -a and -= operator") {
     C = A - B;
     A -= B;
     for (int i = 0; i < 3; i++) {
@@ -43,7 +42,7 @@ TEST_CASE("Testing the matrix class") {
   }
 
   SUBCASE(
-      "Testing * / *= operator in each overload (matrix product and scalar "
+      "Testing * and *= operator in each overload (matrix product and scalar "
       "product)") {
     C = A * B;
     A *= B;
@@ -90,7 +89,7 @@ TEST_CASE("Testing the matrix class") {
     CHECK(M(2, 2) == doctest::Approx(0.9521520));
   }
 
-  SUBCASE("Testing * / *= operator between Matrix and Point") {
+  SUBCASE("Testing * and *= operator between Matrix and Point") {
     dt::Matrix M{};
     M(0, 0) = 0.3;
     M(0, 1) = 0.2;

@@ -1,12 +1,11 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-#include "../render.hpp"
-
+#include "../donutopia.hpp"
 #include "doctest.h"
 
 TEST_CASE("Testing projectPoint function") {
   dt::Camera cam(dt::Point(1., 2., -3.), M_PI_4, -M_PI_2 / 3., 0., 1920, 1080,
-             M_PI / 3.);
+                 M_PI / 3.);
 
   SUBCASE("Testing point outside camera field") {
     int pos = dt::projectPoint(cam, dt::Point(5., -3., 10.));
@@ -23,7 +22,7 @@ TEST_CASE("Testing projectPoint function") {
 
 TEST_CASE("Testing render function") {
   dt::Camera cam(dt::Point(1., 2., -3.), M_PI_4, -M_PI_2 / 3., 0., 1920, 1080,
-             M_PI / 3.);
+                 M_PI / 3.);
 
   SUBCASE("Testing point behind camera") {
     // since we can't directly acces to the if statement

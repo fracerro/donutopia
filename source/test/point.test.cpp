@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-#include "../matrix.hpp"
+#include "../donutopia.hpp"
 #include "doctest.h"
 
 TEST_CASE("Testing the matrix class") {
@@ -12,7 +12,7 @@ TEST_CASE("Testing the matrix class") {
   CHECK((c == b) == true);
   CHECK((c == a) == false);
 
-  SUBCASE("Testing + / += operator") {
+  SUBCASE("Testing + and += operator") {
     c = a + b;
     a += b;
     CHECK(a(0) == 2);
@@ -20,7 +20,7 @@ TEST_CASE("Testing the matrix class") {
     CHECK(a(2) == 4);
     CHECK(c == a);
   }
-  SUBCASE("Testing - / -= operator") {
+  SUBCASE("Testing - and -= operator") {
     c = a - b;
     a -= b;
     CHECK(a(0) == 0);
@@ -28,7 +28,7 @@ TEST_CASE("Testing the matrix class") {
     CHECK(a(2) == -2);
     CHECK(c == a);
   }
-  SUBCASE("Testing * / *= operator") {
+  SUBCASE("Testing * and *= operator") {
     c = b * lambda;
     b *= lambda;
     CHECK(b(0) == 2);
@@ -36,7 +36,7 @@ TEST_CASE("Testing the matrix class") {
     CHECK(b(2) == 6);
     CHECK(c == b);
   }
-  SUBCASE("Testing / / /= operator") {
+  SUBCASE("Testing / and /= operator") {
     c = b / lambda;
     b /= lambda;
     CHECK(b(0) == 0.5);
@@ -73,7 +73,8 @@ TEST_CASE("Testing the matrix class") {
     CHECK(P(2) == doctest::Approx(1.414213562));
   }
   SUBCASE("Testing rotatedPoint function") {
-    dt::Point P = dt::rotatedPoint(dt::Point(1., 2., -3.), M_PI / 6., dt::Point(-1., 2., 2.));
+    dt::Point P = dt::rotatedPoint(dt::Point(1., 2., -3.), M_PI / 6.,
+                                   dt::Point(-1., 2., 2.));
     CHECK(P(0) == doctest::Approx(-0.7559831));
     CHECK(P(1) == doctest::Approx(1.4760677));
     CHECK(P(2) == doctest::Approx(-3.3540593));

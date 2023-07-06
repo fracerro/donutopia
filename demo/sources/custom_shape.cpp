@@ -56,6 +56,7 @@ int main() {
   sprites.push_back(cone);
   auto res = render(cam, sprites, dt::RGB(128, 128, 128));
 
+  // convert the output image in order to be usable for SFML
   std::vector<sf::Uint8> pixels;
   for (int i = 0; i < 1920 * 1080; i++) {
     pixels.push_back(res[i].R);

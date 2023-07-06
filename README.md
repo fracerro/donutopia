@@ -4,7 +4,7 @@
 
 Compile *only the library*:
 ```
-cmake -S . -B build -DBUILD_TESTING=ON
+cmake -S . -B build -DBUILD_TESTING=OFF
 cmake --build build
 ```
 

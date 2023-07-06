@@ -8,10 +8,10 @@
 #include "shape.hpp"
 
 namespace dt {
-    std::vector<RGB> render(const Camera&,
-                            const std::vector<std::shared_ptr<Shape>>&, RGB);
-    // maybe remove projectPoint from hpp
-    int projectPoint(const Camera&, const Point&);
-}
+std::vector<RGB> render(const Camera&,
+                        const std::vector<std::shared_ptr<Shape>>&, RGB);
+// maybe remove projectPoint from hpp
+int projectPoint(const Camera&, const Point&);
+}  // namespace dt
 
 #endif

@@ -2,10 +2,11 @@
 #define CONFIG_HPP
 
 namespace dt {
-    using ftype = float;
+// change from float to double to increase precision
+using ftype = float;
 
-    // max number of pixels on camera side
-    const int maxPixel = 4096;
-}
+// max number of pixels on camera side
+const int maxPixel = 4096;
+}  // namespace dt
 
 #endif

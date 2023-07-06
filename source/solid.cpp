@@ -2,11 +2,6 @@
 
 #include <cmath>
 
-#include "config.hpp"
-#include "matrix.hpp"
-#include "shape.hpp"
-#include "solid.hpp"
-
 namespace dt {
 // using the contructor ": var(var_value) ..." generates an error (color not
 // defined), no idea why
@@ -133,8 +128,8 @@ std::vector<Point> Cylinder::computePoints() const {
       figure.push_back(q);
     }
   }
-  for (int k = -Z; k < Z; k++) {  // upper and lower faces creation cycle
-    for (int l = -Z; l < Z; l++) {
+  for (int k = -Z; k < Z; k += 2) {  // upper and lower faces creation cycle
+    for (int l = -Z; l < Z; l += 2) {
       ftype distance = sqrt(pow(R * l / Z, 2) + pow(R * k / Z, 2));
       if (distance > R || distance < r) {
         continue;  // in this condition we are checking that the point is
