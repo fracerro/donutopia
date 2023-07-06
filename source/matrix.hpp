@@ -10,7 +10,6 @@
 namespace dt {
 class Point;
 
-// 3 x 3
 class Matrix {
  private:
   std::array<std::array<ftype, 3>, 3> mat{};
