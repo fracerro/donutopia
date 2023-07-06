@@ -18,11 +18,11 @@ class Cone : public dt::Shape {
     color = color_;
   }
 
-  void setR(dt::ftype R_) { R = R_; }
-  void seth(dt::ftype h_) { h = h_; }
+  void setR(const dt::ftype R_) { R = R_; }
+  void seth(const dt::ftype h_) { h = h_; }
 
-  dt::ftype getR() { return R; }
-  dt::ftype geth() { return h; }
+  dt::ftype getR() const { return R; }
+  dt::ftype geth() const { return h; }
 
   std::vector<dt::Point> computePoints() const override {
     std::vector<dt::Point> figure{};

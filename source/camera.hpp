@@ -8,10 +8,10 @@ class Camera {
  private:
   Point position{};  // camera position
 
-  ftype phi{};    // polar angle
-  ftype theta{};  // azimuthal angle
-  ftype psi{};  // rotation of camera field of view with respect to the default
-                // orientation
+  ftype phi{};       // polar angle
+  ftype theta{};     // azimuthal angle
+  ftype psi{};   // rotation of camera field of view with respect to the default
+                 // orientation
 
   int pixelX{};  // number of pixels on the horizontal edge
   int pixelY{};  // number of pixels on the vertical edge

@@ -22,9 +22,9 @@ class Point {  // x,y,z vector
   ftype const& operator()(int) const;
   ftype& operator()(int);
 
-  ftype norm() const;         // returns the norm of the vector
-  ftype normSquared() const;  // returns the square of norm
-  Point unitVector() const;   // Normalizes the vector
+  ftype norm() const;               // returns the norm of the vector
+  ftype normSquared() const;        // returns the square of norm
+  Point unitVector() const;         // Normalizes the vector
 
   Point& operator+=(const Point&);  // vector sum
   Point& operator-=(const Point&);  // vector difference
